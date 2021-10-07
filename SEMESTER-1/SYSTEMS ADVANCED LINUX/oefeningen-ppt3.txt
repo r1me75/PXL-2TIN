@@ -1,0 +1,97 @@
+Oefening 1 ppt 3
+
+Run eerst byobu: 
+	Shift + f2 -> split screen
+	Shift + f3 en Shift + f4 voor navigatie tussen screens
+
+Zorg voor een interactieve sessie in een Centos-container:
+	docker run -it centos.7.9.2009
+
+geef de container als funky-name: MijnCentOSContainer
+	ga naar tweede screen -> check met docker container ls de funky name van uw centos container
+	docker container rename <die_funky_naam_van_centos> MijnCentOSContainer
+
+laat zien dat je daadwerkelijk in een Centos-container zit door de versie van Centos te tonen
+	docker system info
+	
+laat de kernel-versie zien en vergelijk met de kernel-versie van de host (kernel wordt gedeeld)
+	uname -r -> laat kernel info zien
+	docker containers gebruiken de kernel van uw ubuntu vmware
+
+installeer vim
+	yum install vim
+	waarom yum? Yum is de package manager van centos (ipv apt)
+
+maak met vim een bestand aan in je homefolder    (met een willekeurige tekst om te testen)
+	(optional) cd ./home
+	vim hello.txt
+	druk op i -> insert mode
+	type iets
+	escape + wq! of Shift + zz
+	
+verlaat de container zonder hem te stoppen
+	ctrl + p + q
+
+reattach naar de container
+	docker attach MijnCentOSContainer
+
+verlaat de container zonder hem te stoppen
+	ctrl + p + q
+
+pauzeer de container
+	docker container pause MijnCentOSContainer
+	
+stop de container
+	docker container stop MijnCentOSContainer
+
+start de container
+	docker container start MijnCentOSContainer
+
+reattach naar de container
+	docker attach MijnCentOSContainer
+
+controleer of het bestand in je homefolder nog bestaat
+	gebruik commande "ls" -_-
+
+verlaat de container zodat deze ook gestopt is
+	exit
+	
+verwijder de container
+	docker (optional container) rm MijnCentOSContainer
+	
+
+Oefening 2
+
+Start drie CentOS-containers met als funky-names: 
+	docker run --name CentOSstopped1 centos:7.9.2009
+	docker run --name CentOSstopped2 centos:7.9.2009
+	docker run --name CentOSstopped3 centos:7.9.2009
+
+Start drie CentOS-containers op die in de achtergrond blijven draaien met als funky-names:
+	docker run -d --name CentOSrunning1 centos:7.9.2009
+	docker run -d --name CentOSrunning2 centos:7.9.2009
+	docker run -d --name CentOSrunning3 centos:7.9.2009
+	
+Toon enkel alle runnende containers
+	docker ps of docker container ls
+	
+Toon alle containers, ook die op de achtergrond draaien
+	docker ps -a of docker container ls -a
+
+Verwijder de container CentOSstopped1
+	docker rm CentOSstopped1
+
+Verwijder de op de achtergrond runnende container CentOSrunning1 zonder deze eerst te stoppen
+	docker rm -f CentOSrunning1
+
+Verwijder ineens alle gestopte containers
+	docker container prune
+	
+Verwijder ineens alle draaiende containers zonder deze eerst te stoppen
+	
+	
+Start een container die gestopt is en een container die nog op de achtergrond draait
+	
+
+Verwijder ineens alle containers (gestopt en draaiend)
+	

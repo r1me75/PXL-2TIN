@@ -1,0 +1,10 @@
+1.	Nonfunctional requirement
+2.	Business rule
+3.	Functional requirement
+4.	User requirement
+5.	Feature
+6.	Constraint
+7.	Business requirement		
+8.	System requirement
+9.	Quality attribute
+10.	External interface requirement
