@@ -1,0 +1,44 @@
+Ik heet Emir Ozdemir, ik ben 19 jaar oud en ik kom uit heusden-zolder. 
+Ik ben afgestudeerd als een full stack developer aan de Hogeschool Pxl.
+En momenteel ben ik hier aan het solliciteren voor de positie Full-Stack Web Developer bij Xplore Group.
+
+Ik ben een ambitieuze en vaardige allround ontwikkelaar met veel techische kennis over diverse applicaties, talen en systemen. 
+Daarnaast ben ik sociaal en vind ik het een uitdaging om in teamverband doelen te behalen. Eigenschappen die bij mij horen zijn; accuraat, stressbestendig, verantwoordelijk en doorzettingsvermogen.
+
+
+Mobile first: Een mobile first aanpak of strategie houdt in dat een desktop website webshop eerst wordt ontworpen met de mobiele versie, 
+die vervolgens wordt aangepast aan grotere schermen. In tegenstelling tot de traditionele aanpak waarbij wordt begonnen met de desktop versie en die dan vervolgens wordt aangepast
+aann kleinere schermen.
+
+Ik weet dat Xplore group een grote en een internationale bedrijf is, als ik me niet vergis hebben jullie ongeveer 800 werknemers 
+en hebben jullie in 3 verschillende landen kantoren.. 
+
+
+Xplore group: We zetten ideeën om in succesvolle business cases door middel van effectieve strategieën en logische oplossingen.  
+Zo leveren we een sterke en betrouwbare basis waarop je onderneming succesvol en duurzaam kan op verder bouwen.
+We leggen ons toe op totaaloplossingen en exploreren welke van onze expertises jou begeleiden naar vernieuwing. 
+Van concept naar ontwerp tot creatie. Van ontwikkeling, naar monitoring tot onderhoud.
+
+Agile werkt als volgt: 
+
+In plaats van dat je vooraf een uitgebreid projectplan maakt met ontwerpen en onderzoeken vooraf ga je in de Agile projecten direct aan de slag. 
+In een korte tijdframes (iteraties, timeboxen of in Scrum terminologie: sprints) van ongeveer 1 tot 4 weken bouw je een deel van het project. 
+En dan na die periode (iteratie, timebox, sprint) bekijk je opnieuw wat dan het belangrijkste is om te doen in de volgende iteratie. Zo kom je tot het eindresultaat in een x aantal iteraties. 
+
+
+
+“Ik ben nogal eigenwijs.”
+“Ik ben behoorlijk eigenwijs. Ik heb een sterke mening en ik ben niet bang om deze te uiten. Ik durf te vertrouwen op mijn eigen koers. 
+Soms schop ik mensen daardoor tegen het zere been. Natuurlijk houd ik wel altijd rekening met feedback van mijn collega’s. 
+Als iets echt niet door de beugel kan, dan luister ik daar natuurlijk naar. 
+Maar juist door mijn eigenwijsheid hebben we al heel wat problemen getackeld die anders nog steeds op tafel zouden liggen.”
+
+“Ik werk iets té zorgvuldig.”
+“Ik vind het belangrijk om mijn werk goed en netjes uit te voeren. Maar als ik iets te ver doorsla in die zorgvuldigheid, dan vind ik het moeilijk om knopen door te hakken. 
+In plaats van weloverwogen word ik dan niet besluitvaardig. Ik heb gemerkt door hier met collega’s over te praten en met hen de prioriteiten te stellen, 
+ik mijn overzorgvuldigheid al snel weer los kan laten. Dan zie ik ook weer in dat het helemaal niet noodzakelijk is dat alle spreekwoordelijke punten en komma’s op exact de goede plek staan.”
+
+“Ik ben niet snel tevreden.”
+“Ik ben heel veeleisend naar mezelf en mijn werk toe. Je zou misschien denken dat ik diezelfde té hoge eisen stel aan de mensen met wie ik samenwerk, maar dat is niet waar. 
+Ik vind het belangrijk dat iedereen op zijn eigen manier kan werken en als zij dingen anders aanpakken, dan sta ik daar juist heel erg voor open. 
+Van verschillende werkstijlen kan je juist veel leren! De afgelopen jaren heb ik zelf ook wel geleerd dat goed vaak ook gewoon goed genoeg is, zeker in het geval van krappe deadlines.”

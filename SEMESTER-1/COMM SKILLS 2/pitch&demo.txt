@@ -1,0 +1,33 @@
+We are all IT students, right? During our studies, we all have used linux in a virtual  machine
+and are still using, so I suppose that all of you have complained about how super slow a 
+virtual machine is and how much time it takes to install and to configure it. We need a solution, we don't want to spend 2 hours installing a simple
+linux virtual machine, do we?  
+
+Fortunately, Windows has found the solution which I will be presenting to you today.
+WSL, also known as the windows subsystem for linux is the ultimate solution for people, 
+studens, developers, like us, who wants or needs to use linux alongside windows.
+
+What is WSL? Wsl is a feature of the windows OS that enables you to run a linux file system,
+along with linux command line tools and GUI apps, directly on your windows machine alongside
+your windows desktop and app.
+
+Before Wsl was introduced, there were only 2 ways to use linux alongside Windows.
+
+For example, you can use a virtualization software like vmware of vbox to install a 
+virtual machine, or you can dualboot your windows machine with linux.
+
+Now, both of them require a lot of time to install, dualbooting is even pretty dangerous if 
+you run up to some errors, you can completely destroy your Windows machine. And a virtual 
+machine, we already know how slow and buggy it works.
+
+So instead of those 2 options, You should use WSL.
+Why? Because it is so easy and simple to insall and configure. It does not ask for any 
+effort and you won't have any headaches.
+
+Besides, It is much faster and reliable than a dualboot or a vm. It also does not require a lot of resources like 
+a vm, You have to give a vm a lot of resources like RAM, cpu which even does not make it faster right.
+
+At last but not least, for me the most important feature is that you can easily access your windows file system inside your
+linux file system and vice versa.
+
+Installation.
