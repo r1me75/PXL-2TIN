@@ -1,0 +1,31 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "c1fcb2e8-7964-4220-ab0a-8261b093a6cb": {
+      "ProjectGuid": "c1fcb2e8-7964-4220-ab0a-8261b093a6cb",
+      "DisplayName": "WebShop.Domain",
+      "ColorIndex": 0
+    },
+    "6d3a8f14-614b-48db-9134-69ed3039fa26": {
+      "ProjectGuid": "6d3a8f14-614b-48db-9134-69ed3039fa26",
+      "DisplayName": "WebShop.AppLogic",
+      "ColorIndex": 1
+    },
+    "39a69c57-3223-41dc-acf0-5302afe2d740": {
+      "ProjectGuid": "39a69c57-3223-41dc-acf0-5302afe2d740",
+      "DisplayName": "WebShop.Infrastructure",
+      "ColorIndex": 2
+    },
+    "5f4bfb6f-9e7d-4a72-9709-83ef74544cc2": {
+      "ProjectGuid": "5f4bfb6f-9e7d-4a72-9709-83ef74544cc2",
+      "DisplayName": "WebShop.UI",
+      "ColorIndex": 3
+    },
+    "38d13aac-4ceb-424d-84fa-e6bc2d5a363e": {
+      "ProjectGuid": "38d13aac-4ceb-424d-84fa-e6bc2d5a363e",
+      "DisplayName": "WebShop.Domain.Tests",
+      "ColorIndex": 4
+    }
+  },
+  "NextColorIndex": 5
+}

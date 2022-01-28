@@ -1,0 +1,7 @@
+2019-01-07T21:27:07.409 - activities_from_strava.txt - UNKNOWN CUSTOMER
+Chad Morse;05/01/2018;riding;150.6
+2019-01-07T21:27:07.413 - activities_from_strava.txt - Text '24122017' could not be parsed at index 2
+2019-01-07T21:27:07.413 - endomodo_activities.txt - INVALID NAME
+2019-01-07T21:27:07.417 - errors.log - INVALID NAME
+2019-01-07T21:27:07.417 - runkeeper_activities.txt - INVALID NAME
+2019-01-07T21:27:07.497 - strava_activities.txt - null

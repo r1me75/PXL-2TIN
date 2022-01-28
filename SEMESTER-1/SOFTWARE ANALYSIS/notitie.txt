@@ -1,0 +1,149 @@
+# notes.txt
+
+# the essential software requirement
+    - goal: to capture the need or problem completely and unambiguously without resorting to specialist jargon, thus understandable to our customer
+
+    - requirements worden opgesteld voor de stakeholders
+        = iedereen die (in)direct betrokken is met het project
+        - primary stakeholders = direct betrokkenen
+        - secundary stakeholders = indirect betrokkenen
+
+    - hoe verder in de tijd, hoe groter de kost voor het oplossen van een bug
+        - problemen moeten zo snel mogelijk gespot worden
+
+
+# what are requirements
+    = specificatie over wat er allemaal geïmplementeerd moet worden
+    - conditions or capabilities needed by a user/stakeholder to solve a problem or achieve an objective
+
+    # scope
+        = sum of the products, services and results to be provided as a project
+        - alles dat geleverd gaat worden door het project
+
+        # project scope
+            = work that must be performed to deliver something with the specified features and functions
+            - het werk dat gedaan moet worden
+
+        # product scope
+            = features and functions that characterize the product, service or result
+            - alle features en funtions die het product moet bevatten
+
+    # iso 25010 - product quality
+        PERFUMeS
+
+        - portability
+        - efficiency
+        - reliability
+        - functionality
+        - usability
+        - maintainability
+        - security
+        - compatibility
+
+    # levels & types
+        # types
+            - functional requirements
+                = defines a function that has to be offered by the system
+
+            - non-functional requirements
+                - bv. speed, availability
+
+                = quality requirements
+                    - defines a qualitative property that the system has to offer
+
+                = constraints
+                    - requirement that limits the solution space
+
+        # levels
+            # business level
+                - sponsor point of view
+                - scope of the project
+                - business objectives
+
+                - business requirements
+                    = high-level business objective that builds a product
+                    - wat zal het product ons bedrijf bieden, waarom hebben we het product nodig?
+                - business rules
+                    = a policy that defines or constraints some aspect of the business
+
+            # user level
+                - user point of view
+                - user goals
+                - user inputs & outputs
+
+                - user requirements
+                    = goal or tasks that specific classes of users must be able to perform with the system
+                    - wat moet de user kunnen doen met het product (systeem)?
+                - quality attributes
+                    = describes a service or performance characteristic of a product
+
+            # product level
+                - system requirements
+                    = top-level requirement for a product that contains multiple subsystems
+                - functional requirements
+                    = what the system does
+                - non-functional requirements
+                    = how well the system does it
+                - constraints
+                    = restriction on the choices available
+                - external interfaces requirements
+                    = description of a connection between software and user
+                - data requirements
+
+    # opmerkingen
+        - nooit een "en" of "of" in requirements
+        - geen negaties gebruiken
+        - exacte aantallen geven
+        - zoveel mogelijk detail geven
+        - 1 requirement moet ook daadwerkelijk gaan over 1 ding
+
+
+# smart requirements
+    specifiek:      duidelijke en gedetailleerde omschrijving van doelstellingen
+    meetbaar:       resultaat moet meetbaar zijn
+    acceptabel:     opdrachtgever/eindgebruiker moet zich achter de doelstellingen scharen
+    realistisch:    niet te makkelijke maar wel haalbare doelstellingen
+    tijdsgebonden:  een objectief moet een deadline hebben
+
+
+# jira
+    = epics, features, user stories, ...
+    - ./assets/user_story_template.png
+
+
+# 04_requirements_development_and_management
+    # requirements engineering
+        = systematic and disciplined approach to the development and management of requirements
+        - goals:
+            - knowing relevant requirements and documenting them
+            - understanding and documenting the desires and needs of stakeholders
+            - specifying and managing requirements
+
+    # requirements management
+        = process of managing existing requirements and requirements related artifacts
+        - includes storing, changing and tracing of requirements
+
+    # methodologieen
+        => project management
+        - volgende stappen behoren tot software analysis:
+            - business case/modeling/study
+            - requirements (stories, epic's)
+            - specifications
+            - analysis
+            - sprint backlog
+
+
+# 05_role_analyst_and_requirements_engineer
+    # belangrijkste skills
+        CACASEM
+
+        - communication
+        - analytical
+        - conflict handling
+        - ability to convince
+        - self-confident
+        - empathy
+        - moderator
+
+    # notes
+        - requirements engineer provides input for the stakeholders

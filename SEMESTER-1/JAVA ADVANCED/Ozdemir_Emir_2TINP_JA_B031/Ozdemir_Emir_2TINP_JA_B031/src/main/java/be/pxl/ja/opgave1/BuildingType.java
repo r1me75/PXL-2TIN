@@ -1,0 +1,11 @@
+package be.pxl.ja.opgave1;
+
+public enum BuildingType {
+	CHIMNEY,
+	SKYSCRAPER,
+	COMMUNICATIONS_TOWER,
+	CONCRETE_TOWER,
+	CONCRETE_STEEL_TOWER,
+	LATTICE_TOWER,
+	STEEL_TOWER
+}

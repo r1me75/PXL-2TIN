@@ -1,0 +1,36 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "88c01ede-1036-4892-b16d-150fa57ea7bb": {
+      "ProjectGuid": "88c01ede-1036-4892-b16d-150fa57ea7bb",
+      "DisplayName": "ShoppingListApp.Domain",
+      "ColorIndex": 0
+    },
+    "65f5ba55-07e8-45c1-a00f-70c3ae1af0ac": {
+      "ProjectGuid": "65f5ba55-07e8-45c1-a00f-70c3ae1af0ac",
+      "DisplayName": "ShoppingListApp.Business",
+      "ColorIndex": 1
+    },
+    "9c91e0c6-bfab-4898-8521-8d94e43abfaf": {
+      "ProjectGuid": "9c91e0c6-bfab-4898-8521-8d94e43abfaf",
+      "DisplayName": "ShoppingListApp.Data",
+      "ColorIndex": 2
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "c8150f37-3dd2-4910-978c-0e015cb3aa30": {
+      "ProjectGuid": "c8150f37-3dd2-4910-978c-0e015cb3aa30",
+      "DisplayName": "ShoppingListApp.Presentation",
+      "ColorIndex": 3
+    },
+    "1dd24b48-2892-4fb2-b0aa-49e4af80e201": {
+      "ProjectGuid": "1dd24b48-2892-4fb2-b0aa-49e4af80e201",
+      "DisplayName": "ShoppingListApp.Presentation.Tests",
+      "ColorIndex": 4
+    }
+  },
+  "NextColorIndex": 5
+}

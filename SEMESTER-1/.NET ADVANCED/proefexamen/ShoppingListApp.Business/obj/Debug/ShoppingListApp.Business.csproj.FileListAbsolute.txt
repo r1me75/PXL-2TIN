@@ -1,0 +1,9 @@
+C:\Users\emiro\Documents\school\PXL-2TIN\SEMESTER-1\.NET ADVANCED\Skelet\ShoppingListApp.Business\bin\Debug\ShoppingListApp.Business.dll
+C:\Users\emiro\Documents\school\PXL-2TIN\SEMESTER-1\.NET ADVANCED\Skelet\ShoppingListApp.Business\bin\Debug\ShoppingListApp.Business.pdb
+C:\Users\emiro\Documents\school\PXL-2TIN\SEMESTER-1\.NET ADVANCED\Skelet\ShoppingListApp.Business\bin\Debug\ShoppingListApp.Domain.dll
+C:\Users\emiro\Documents\school\PXL-2TIN\SEMESTER-1\.NET ADVANCED\Skelet\ShoppingListApp.Business\bin\Debug\ShoppingListApp.Domain.pdb
+C:\Users\emiro\Documents\school\PXL-2TIN\SEMESTER-1\.NET ADVANCED\Skelet\ShoppingListApp.Business\obj\Debug\ShoppingListApp.Business.csproj.AssemblyReference.cache
+C:\Users\emiro\Documents\school\PXL-2TIN\SEMESTER-1\.NET ADVANCED\Skelet\ShoppingListApp.Business\obj\Debug\ShoppingListApp.Business.csproj.CoreCompileInputs.cache
+C:\Users\emiro\Documents\school\PXL-2TIN\SEMESTER-1\.NET ADVANCED\Skelet\ShoppingListApp.Business\obj\Debug\ShoppingListApp.Business.csproj.CopyComplete
+C:\Users\emiro\Documents\school\PXL-2TIN\SEMESTER-1\.NET ADVANCED\Skelet\ShoppingListApp.Business\obj\Debug\ShoppingListApp.Business.dll
+C:\Users\emiro\Documents\school\PXL-2TIN\SEMESTER-1\.NET ADVANCED\Skelet\ShoppingListApp.Business\obj\Debug\ShoppingListApp.Business.pdb

@@ -1,0 +1,6 @@
+C:\Users\emiro\Documents\school\PXL-2TIN\SEMESTER-1\.NET ADVANCED\Skelet\ShoppingListApp.Domain\bin\Debug\ShoppingListApp.Domain.dll
+C:\Users\emiro\Documents\school\PXL-2TIN\SEMESTER-1\.NET ADVANCED\Skelet\ShoppingListApp.Domain\bin\Debug\ShoppingListApp.Domain.pdb
+C:\Users\emiro\Documents\school\PXL-2TIN\SEMESTER-1\.NET ADVANCED\Skelet\ShoppingListApp.Domain\obj\Debug\ShoppingListApp.Domain.csproj.AssemblyReference.cache
+C:\Users\emiro\Documents\school\PXL-2TIN\SEMESTER-1\.NET ADVANCED\Skelet\ShoppingListApp.Domain\obj\Debug\ShoppingListApp.Domain.csproj.CoreCompileInputs.cache
+C:\Users\emiro\Documents\school\PXL-2TIN\SEMESTER-1\.NET ADVANCED\Skelet\ShoppingListApp.Domain\obj\Debug\ShoppingListApp.Domain.dll
+C:\Users\emiro\Documents\school\PXL-2TIN\SEMESTER-1\.NET ADVANCED\Skelet\ShoppingListApp.Domain\obj\Debug\ShoppingListApp.Domain.pdb
