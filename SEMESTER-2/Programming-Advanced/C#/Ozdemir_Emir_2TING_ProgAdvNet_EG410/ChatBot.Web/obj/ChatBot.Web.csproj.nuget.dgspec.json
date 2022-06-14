@@ -1,0 +1,298 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.Web/ChatBot.Web.csproj": {}
+  },
+  "projects": {
+    "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.AppLogic/ChatBot.AppLogic.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.AppLogic/ChatBot.AppLogic.csproj",
+        "projectName": "ChatBot.AppLogic",
+        "projectPath": "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.AppLogic/ChatBot.AppLogic.csproj",
+        "packagesPath": "/Users/r1me/.nuget/packages/",
+        "outputPath": "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.AppLogic/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/r1me/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.Domain/ChatBot.Domain.csproj": {
+                "projectPath": "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.Domain/ChatBot.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.Domain/ChatBot.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.Domain/ChatBot.Domain.csproj",
+        "projectName": "ChatBot.Domain",
+        "projectPath": "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.Domain/ChatBot.Domain.csproj",
+        "packagesPath": "/Users/r1me/.nuget/packages/",
+        "outputPath": "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/r1me/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "Microsoft.Extensions.Identity.Stores": {
+              "target": "Package",
+              "version": "[3.1.25, )"
+            },
+            "System.ComponentModel.Annotations": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.Infrastructure/ChatBot.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.Infrastructure/ChatBot.Infrastructure.csproj",
+        "projectName": "ChatBot.Infrastructure",
+        "projectPath": "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.Infrastructure/ChatBot.Infrastructure.csproj",
+        "packagesPath": "/Users/r1me/.nuget/packages/",
+        "outputPath": "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/r1me/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {
+              "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.AppLogic/ChatBot.AppLogic.csproj": {
+                "projectPath": "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.AppLogic/ChatBot.AppLogic.csproj"
+              },
+              "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.Domain/ChatBot.Domain.csproj": {
+                "projectPath": "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.Domain/ChatBot.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.25, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.25, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.Web/ChatBot.Web.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.Web/ChatBot.Web.csproj",
+        "projectName": "ChatBot.Web",
+        "projectPath": "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.Web/ChatBot.Web.csproj",
+        "packagesPath": "/Users/r1me/.nuget/packages/",
+        "outputPath": "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.Web/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/r1me/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.Infrastructure/ChatBot.Infrastructure.csproj": {
+                "projectPath": "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.Infrastructure/ChatBot.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.25, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.25, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[3.1.25, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
+              "target": "Package",
+              "version": "[3.1.25, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.25, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "target": "Package",
+              "version": "[3.1.25, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.osx-x64",
+              "version": "[3.1.25, 3.1.25]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.300/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

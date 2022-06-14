@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Our chatbots</h1>
+    <p>
+        <ul class="list-group">
+            <li class="list-group-item">
+                @*TODO: link to /ChatRoom/HostedBy/BenLamb*@
+                <a asp-controller="ChatRoom" asp-action="ChatBot" asp-route-botName="BenLamb">BenLamb</a>
+            </li>
+            <li class="list-group-item">
+                @*TODO: link to /ChatRoom/HostedBy/TheTrist*@
+                <a asp-controller="ChatRoom" asp-action="ChatBot" asp-route-botName="TheTrist">TheTrist</a>
+            </li>
+        </ul>
+    </p>   
+</div>

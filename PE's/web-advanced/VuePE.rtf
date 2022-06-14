@@ -1,0 +1,48 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww29820\viewh20500\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs36 \cf0 Vue JS applicatie (Reddit) :\
+\
+	- App heeft 2 gebruikers, Admin en Gebruikers.\
+	- Admins kunnen inloggen en hebben overzicht over alle gebruikers en posts.\
+	- Admins kunnen gebruikers aanpassen en verwijderen maar niet toevoegen.\
+	- Admins kunnen alle posts zien en indien nodig aanpassen of verwijderen.\
+	- Gebruikers kunnen zich registeren en nadien inloggen.\
+	- Gebruikers komen op een homepagina terecht waar alle posts onder elkaar te komen staan. \
+	- Gebruikers kunnen posts posten en hun accountinformatie aanpassen.\
+	- Gebruikers kunnen een post liken en daarop commenteren. Deze worden dan ook getoond.\
+	- Gebruikers kunnen hun comment verwijderen.\
+	\
+	User: \
+		- id: Int\
+		- firstName\
+		- lastName\
+		- username: String,\
+		- email: String,\
+		- password: String,\
+		- likedPosts: [ Post ]  (om er voor te zorgen dat de User 1 keer een post kan liken)\
+		- posts: [ Post ]  \
+		\
+	Admin: \
+		- id: Int\
+		- email: String\
+		- password: String\
+\
+	Post: \
+		id: Int\
+		titel: String,\
+		description: String,\
+		comments: [ Comment ]  \
+		likes: Integer\
+		isVisible: Boolean default True -> Admin kan een post onzichtbaar maken\
+		createdAt: DateTime\
+		\
+	Comment: \
+		id: Int\
+		user: User,\
+		createdAt: DateTime,\
+		post: Post}

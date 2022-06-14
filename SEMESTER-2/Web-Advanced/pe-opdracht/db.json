@@ -1,0 +1,25 @@
+{
+    "course": [
+        {
+            "titel": "",
+            "teacher": "",
+            "students": []
+        }
+    ],
+    "teacher": [
+        {
+            "id": "1",
+            "firstName": "Emir",
+            "lastName": "Ozdemir",
+            "email": "emirozd75@hotmail.com",
+            "courses": []
+        }
+    ],
+    "student": {
+        "id": "1",
+        "firstName": "Dummy Name",
+        "lastName": "Dummy LastName",
+        "email": "dummy@email.be",
+        "courses": []
+    }
+}

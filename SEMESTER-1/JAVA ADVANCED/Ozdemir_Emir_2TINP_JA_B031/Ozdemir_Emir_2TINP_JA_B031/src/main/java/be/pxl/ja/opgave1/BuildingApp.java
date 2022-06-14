@@ -45,10 +45,10 @@ public class BuildingApp {
 		return this.buildings.stream()
 				.map(building -> building.getLocation().getCountry())
 				.distinct()
-				.sorted()
-				.collect(Collectors.toList())
+				.sorted().toList()
 				.toString();
 //				.substring(1, 1);
+		// Colelctors.joining(",")
 	}
 
 	// 5. Geef een lijst van alle buildings met type SKYSCRAPER van het jaar 2000. Sorteer de buildings alfabetisch (A -> Z) op city.

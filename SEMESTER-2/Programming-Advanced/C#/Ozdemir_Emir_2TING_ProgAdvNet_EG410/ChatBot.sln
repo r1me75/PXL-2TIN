@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32319.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatBot.Web", "ChatBot.Web\ChatBot.Web.csproj", "{099B8A9C-16CE-4EC1-9A23-06A61455669B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatBot.Infrastructure", "ChatBot.Infrastructure\ChatBot.Infrastructure.csproj", "{9F456F2E-A6F8-4B5B-ADAA-DC810CB58F18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatBot.Domain", "ChatBot.Domain\ChatBot.Domain.csproj", "{D9738721-3505-45CE-BDEF-14B44DBE79D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatBot.AppLogic", "ChatBot.AppLogic\ChatBot.AppLogic.csproj", "{DF445E6D-D8F0-413A-A35A-5040E976C49C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatBot.Web.Tests", "ChatBot.Web.Tests\ChatBot.Web.Tests.csproj", "{3C38C68B-81BA-4208-B3E5-1839C2D26CAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatBot.AppLogic.Tests", "ChatBot.AppLogic.Tests\ChatBot.AppLogic.Tests.csproj", "{857CBA83-1773-40A5-A243-83D3F0C15D7F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{099B8A9C-16CE-4EC1-9A23-06A61455669B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{099B8A9C-16CE-4EC1-9A23-06A61455669B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{099B8A9C-16CE-4EC1-9A23-06A61455669B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{099B8A9C-16CE-4EC1-9A23-06A61455669B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F456F2E-A6F8-4B5B-ADAA-DC810CB58F18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F456F2E-A6F8-4B5B-ADAA-DC810CB58F18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F456F2E-A6F8-4B5B-ADAA-DC810CB58F18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F456F2E-A6F8-4B5B-ADAA-DC810CB58F18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9738721-3505-45CE-BDEF-14B44DBE79D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9738721-3505-45CE-BDEF-14B44DBE79D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9738721-3505-45CE-BDEF-14B44DBE79D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9738721-3505-45CE-BDEF-14B44DBE79D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF445E6D-D8F0-413A-A35A-5040E976C49C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF445E6D-D8F0-413A-A35A-5040E976C49C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF445E6D-D8F0-413A-A35A-5040E976C49C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF445E6D-D8F0-413A-A35A-5040E976C49C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C38C68B-81BA-4208-B3E5-1839C2D26CAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C38C68B-81BA-4208-B3E5-1839C2D26CAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C38C68B-81BA-4208-B3E5-1839C2D26CAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C38C68B-81BA-4208-B3E5-1839C2D26CAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{857CBA83-1773-40A5-A243-83D3F0C15D7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{857CBA83-1773-40A5-A243-83D3F0C15D7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{857CBA83-1773-40A5-A243-83D3F0C15D7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{857CBA83-1773-40A5-A243-83D3F0C15D7F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {39E94A2B-4954-4B0F-9826-FD5ED6B35D7C}
+	EndGlobalSection
+EndGlobal

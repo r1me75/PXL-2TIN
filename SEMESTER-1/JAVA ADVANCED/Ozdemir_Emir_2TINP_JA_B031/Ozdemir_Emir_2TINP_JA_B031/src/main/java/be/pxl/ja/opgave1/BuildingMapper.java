@@ -32,5 +32,4 @@ public class BuildingMapper {
 	private static BuildingType toStructureType(String value) {
 		return BuildingType.valueOf(value.replaceAll(" ", "_").replaceAll("/", "_").toUpperCase());
 	}
-
 }

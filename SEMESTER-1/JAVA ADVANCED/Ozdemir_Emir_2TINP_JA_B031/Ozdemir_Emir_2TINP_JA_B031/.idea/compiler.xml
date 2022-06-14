@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="examen_21_22_zit1" />
+        <module name="Ozdemir_Emir_2TINP_JA_B031" />
       </profile>
     </annotationProcessing>
   </component>

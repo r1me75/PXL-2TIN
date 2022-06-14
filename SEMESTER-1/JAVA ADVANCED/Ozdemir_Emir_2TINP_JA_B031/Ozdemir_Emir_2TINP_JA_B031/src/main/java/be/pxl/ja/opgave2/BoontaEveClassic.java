@@ -20,6 +20,8 @@ public class BoontaEveClassic {
 		System.out.println("1-2-3...GO");
 		// TODO: start all podracers
 		// TODO: when all podracers are ready (finished or crashed), print the ranking
+
+		// Join in aparte lus
 		racers.forEach(r -> {
 			r.start();
 			try {

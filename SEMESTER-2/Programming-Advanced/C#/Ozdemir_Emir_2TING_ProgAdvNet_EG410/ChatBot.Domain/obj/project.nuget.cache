@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "dgSpecHash": "xPSGn5l43PveGvuS3Os8wzHxp0AgdAuIndaf/DtvLcFcy6sBvzKggHCj+O8T/rwQ9I5tUFXK+IG7tE0OULCLbQ==",
+  "success": true,
+  "projectFilePath": "/Users/r1me/Documents/school/PXL-2TIN/SEMESTER-2/Programming-Advanced/C#/wetransfer_c-zip_2022-06-11_1416/Ozdemir_Emir_2TING_ProgAdvNet_EG410/ChatBot.Domain/ChatBot.Domain.csproj",
+  "expectedPackageFiles": [
+    "/Users/r1me/.nuget/packages/microsoft.aspnetcore.cryptography.internal/3.1.25/microsoft.aspnetcore.cryptography.internal.3.1.25.nupkg.sha512",
+    "/Users/r1me/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/3.1.25/microsoft.aspnetcore.cryptography.keyderivation.3.1.25.nupkg.sha512",
+    "/Users/r1me/.nuget/packages/microsoft.extensions.caching.abstractions/3.1.25/microsoft.extensions.caching.abstractions.3.1.25.nupkg.sha512",
+    "/Users/r1me/.nuget/packages/microsoft.extensions.configuration/3.1.25/microsoft.extensions.configuration.3.1.25.nupkg.sha512",
+    "/Users/r1me/.nuget/packages/microsoft.extensions.configuration.abstractions/3.1.25/microsoft.extensions.configuration.abstractions.3.1.25.nupkg.sha512",
+    "/Users/r1me/.nuget/packages/microsoft.extensions.configuration.binder/3.1.25/microsoft.extensions.configuration.binder.3.1.25.nupkg.sha512",
+    "/Users/r1me/.nuget/packages/microsoft.extensions.dependencyinjection/3.1.25/microsoft.extensions.dependencyinjection.3.1.25.nupkg.sha512",
+    "/Users/r1me/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/3.1.25/microsoft.extensions.dependencyinjection.abstractions.3.1.25.nupkg.sha512",
+    "/Users/r1me/.nuget/packages/microsoft.extensions.identity.core/3.1.25/microsoft.extensions.identity.core.3.1.25.nupkg.sha512",
+    "/Users/r1me/.nuget/packages/microsoft.extensions.identity.stores/3.1.25/microsoft.extensions.identity.stores.3.1.25.nupkg.sha512",
+    "/Users/r1me/.nuget/packages/microsoft.extensions.logging/3.1.25/microsoft.extensions.logging.3.1.25.nupkg.sha512",
+    "/Users/r1me/.nuget/packages/microsoft.extensions.logging.abstractions/3.1.25/microsoft.extensions.logging.abstractions.3.1.25.nupkg.sha512",
+    "/Users/r1me/.nuget/packages/microsoft.extensions.options/3.1.25/microsoft.extensions.options.3.1.25.nupkg.sha512",
+    "/Users/r1me/.nuget/packages/microsoft.extensions.primitives/3.1.25/microsoft.extensions.primitives.3.1.25.nupkg.sha512",
+    "/Users/r1me/.nuget/packages/system.buffers/4.4.0/system.buffers.4.4.0.nupkg.sha512",
+    "/Users/r1me/.nuget/packages/system.componentmodel.annotations/5.0.0/system.componentmodel.annotations.5.0.0.nupkg.sha512",
+    "/Users/r1me/.nuget/packages/system.memory/4.5.2/system.memory.4.5.2.nupkg.sha512",
+    "/Users/r1me/.nuget/packages/system.numerics.vectors/4.4.0/system.numerics.vectors.4.4.0.nupkg.sha512",
+    "/Users/r1me/.nuget/packages/system.runtime.compilerservices.unsafe/4.7.1/system.runtime.compilerservices.unsafe.4.7.1.nupkg.sha512"
+  ],
+  "logs": []
+}

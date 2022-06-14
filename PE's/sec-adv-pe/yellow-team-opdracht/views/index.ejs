@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yellow Team</title>
+</head>
+<body>
+    <% if(! isAuthenticated) { %>
+        <h1>Welkom! Om de secret te kunnen zien moet je eerst inloggen!</h1>
+
+        <a href="/login" >Klik hier om te inloggen</a>
+    <% } else { %> 
+        <h1>Welkom terug <%= email %></h1>
+    
+        <p>Secret Message: <%= message %></p>
+
+        <a href="/logout">Klik hier om te uitloggen</a>
+    <% } %>
+</body>
+</html>
