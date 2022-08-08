@@ -1,0 +1,17 @@
+#+TITLE: Big Data leerstof PXL
+#+AUTHOR: Robin Wils
+#+INCLUDE: "org-options.org"
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="solarized-dark.min.css"/>
+-----
+[[https://pxl-college-projects.gitlab.io/big-data-exercises-pxl.gitlab.io/index.org][View org source]]
+
+- [[file:plsql/plsql.org][PLSQL]]
+- [[file:theorie/theorie.org][Samenvatting theorie]]
+- [[file:mongodb/mongodb.org][MongoDB]]
+
+\\
+
+You can download an [[https://gitlab.com/PXL-college-projects/big-data-exercises-pxl.gitlab.io/-/archive/master/big-data-exercises-pxl.gitlab.io-master.zip?path=public][offline version]] of this website.
+
+This website is generated with GNU Emacs - Org mode. \\
+Feel free to visit my personal site at https://robinwils.gitlab.io.

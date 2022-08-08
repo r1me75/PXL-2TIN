@@ -1,0 +1,25 @@
+{
+  "name": "vendor_name/oef1",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "T490",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+    "ext-http": "*",
+    "ext-pdo": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "users\\": "src/users",
+      "identifiable\\": "src/identifiable"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "9"
+  }
+}

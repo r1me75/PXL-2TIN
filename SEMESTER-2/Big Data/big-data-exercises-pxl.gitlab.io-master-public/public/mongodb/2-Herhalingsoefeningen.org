@@ -1,0 +1,282 @@
+#+TITLE: Oefeningen MongoDB - Herhalingsoefeningen MongoDB
+#+AUTHOR: Robin Wils
+#+INCLUDE: "../org-options.org"
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../solarized-dark.min.css"/>
+-----
+[[file:../index.org][Home]] > [[file:mongodb.org][MongoDB]] > Herhalingsoefeningen \\
+[[https://pxl-college-projects.gitlab.io/big-data-exercises-pxl.gitlab.io/mongodb/2-Herhalingsoefeningen.org][View org source]]
+
+#+TOC: headlines
+
+** Opgave 1
+Geef een overzicht van de aanwezigen databanken.
+
+#+BEGIN_SRC mongo
+show dbs
+#+END_SRC
+
+** Opgave 2
+Maak een databank aan met de naam 'pokemon'.
+
+#+BEGIN_SRC mongo
+use pokemon
+#+END_SRC
+
+** Opgave 3
+Maak in de databank ‘pokemon’ een collection met naam ‘pokedex’.
+
+#+BEGIN_SRC mongo :db pokemon
+db.createCollection("pokedex")
+#+END_SRC
+
+** Opgave 4
+Voeg een document toe met volgende kenmerken:
+
+| Name:     | Pikachu  |
+| Type:     | electric |
+| Weakness: | ground   |
+
+Laat het object-id door mongodb creëren.
+
+#+BEGIN_SRC mongo :db pokemon
+db.pokedex.insertOne({
+  "name": "Pikachu",
+  "type": "electric",  
+  "weakness": ["ground"]
+})
+#+END_SRC
+
+** Opgave 5
+Voeg een document toe met volgende kenmerken: \\
+
+Zorg ervoor dat je zelf het object-id toekent. Voor Charmander is dat ‘004’.
+
+| Name: | Charmander |
+| Type: | fire       |
+
+Probeer eens om volgend document toe te voegen:
+
+| Object-id: | 004 (als tekst) |
+| Name:      | Charmander2     |
+
+#+BEGIN_SRC mongo :db pokemon
+db.pokedex.insertOne({
+  "_id": "004",
+  "name": "Charmander",
+  "type": "fire",
+})
+#+END_SRC
+
+/Deze functie geeft een error doordat er al een pokemon is met dat id./
+#+BEGIN_SRC mongo :db pokemon
+db.pokedex.insertOne({
+  "_id": "004",
+  "name": "Charmander2"
+})
+#+END_SRC
+
+** Opgave 6
+Voeg een document toe met volgende kenmerken:  
+
+| Object-id: | 005                 |
+| Name:      | Charmeleon          |
+| Type:      | fire                |
+| Sort:      | flame               |
+| Weakness:  | ground, rock, water |
+
+#+BEGIN_SRC mongo :db pokemon
+db.pokedex.insertOne({
+  "_id": "005",
+  "name": "Charmeleon",
+  "type": "fire",
+  "sort": "flame",
+  "weakness": ["ground", "rock", "water"]
+})
+#+END_SRC
+
+** Opgave 7
+Voeg via 1 instructie 2 documenten toe:
+| Object-id: | 007                  |
+| Name:      | Squirtle             |
+| Type:      | water                |
+| Sort:      | tiny turtle          |
+| Evolution: | Wartortle, Blastoise |
+
+\\
+
+| Object-id: | 008       |
+| Name:      | Wartortle |
+| Type:      | water     |
+| Weakness:  | electric  |
+
+#+BEGIN_SRC mongo :db pokemon
+db.pokedex.insertMany([
+  {
+    "_id": "007", 
+    "name": "Squirtle", 
+    "type": "water",
+    "sort": "tiny turtle",
+    "evolution": ["Wartortle", "Blastoise"]
+  },
+  {
+    "_id": "008", 
+    "name": "Wartortle", 
+    "type": "water",
+    "weakness": ["electric"]
+  }
+])
+#+END_SRC
+
+** Opgave 8 
+Wijzig het document met id 008. \\
+Voeg hieraan volgend key/value-pair: Evolution: Blastoise
+
+#+BEGIN_SRC mongo :db pokemon
+db.pokedex.update(
+  {"_id": "008"},
+  {$set: {"evolution": ["Blastoise"]}}
+)
+#+END_SRC
+
+** Opgave 9
+Wijzig het document met id 008. \\
+Voeg een extra weakness toe: grass
+
+#+BEGIN_SRC mongo :db pokemon
+db.pokedex.update(
+  {"_id": "008"},
+  {$set: {"weakness.1": "grass"}}
+)
+#+END_SRC
+
+** Opgave 10 
+Wijzig alle documenten waarin het type ‘water’ is. \\
+Voeg een kenmerk toe: Capacity: torrent
+
+#+BEGIN_SRC mongo :db pokemon
+db.pokedex.update(
+  {"type": "water"},
+  {$set: {"capacity": "torrent"}},
+  {multi:true}
+)
+#+END_SRC
+
+** Opgave 11 
+Vervang het document met id ‘004’. Zorg voor volgende inhoud:
+
+| Object-id: | 004                 |
+| Name:      | Charmander          |
+| Sort:      | lizard              |
+| Weakness:  | ground, rock, water |
+
+#+BEGIN_SRC mongo :db pokemon
+db.pokedex.update(
+  {"_id": "004"},
+  {
+    "name": "Charmander",
+    "sort": "lizard",
+    "weakness": ["ground", "rock", "water"]
+  },
+  {$unset: {"type": ""}}
+)
+#+END_SRC
+
+** Opgave 12 
+Voeg via 1 instructie 2 documenten toe:
+
+| Object-id: | 010      |
+| name:      | Caterpie |
+| Type:      | bug      |
+
+\\
+
+| Object-id: | 011     |
+| Name:      | Metapod |
+| Type:      | bug     |
+
+#+BEGIN_SRC mongo :db pokemon
+db.pokedex.insertMany([
+  {
+    "_id": "010", 
+    "name": "Caterpie", 
+    "type": "bug"
+  },
+  {
+    "_id": "011", 
+    "name": "Metapod", 
+    "type": "bug"
+  }
+])
+#+END_SRC
+
+** Opgave 13 
+Wijzig alle documenten waarin het type ‘bug’ is. \\
+Voeg volgende kenmerken toe:\\
+- Sort: worm
+- Weakness: fire, flying, rock
+
+#+BEGIN_SRC mongo :db pokemon
+db.pokedex.update(
+  {"type": "bug"},
+  {$set:{
+    "sort": "worm",
+    "weakness": ["fire", "flying", "rock"]
+  }},
+  {multi:true}
+)
+#+END_SRC
+
+** Opgave 14 
+Voeg een document toe met volgende kenmerken: \\
+
+| Object-id: | 001           |   |
+| Name:      | Bulbasaur     |   |
+| Type:      | grass, poison |   |
+| Stats:     | AttackScore:  | 3 |
+|            | DefenceScore: | 2 |
+|            | Speed:        | 3 |
+
+#+BEGIN_SRC mongo :db pokemon
+db.pokedex.insertOne({
+  "_id": "001",
+  "name": "Bulbasaur",
+  "type": ["grass", "poison"],
+  "stats": [{
+      "attackScore": 3,
+      "defenceScore": 2,
+      "speed": 3
+  }]
+})
+#+END_SRC
+
+** Opgave 15 
+Wijzig bij het document met als Name ‘Metapod’ het kenmerk sort in cocoon.
+
+#+BEGIN_SRC mongo :db pokemon
+db.pokedex.update(
+  {"name": "Metapod"},
+  {$set: {"sort": "cocoon"}},
+  {multi: true}
+)
+#+END_SRC
+
+** Opgave 16 
+Voeg bij het document met als Name ‘Metapod’ volgend subdocument toe:
+
+| Stats: | AttackScore:   | 1 |
+|        | DefenceScore:  | 3 |
+|        | SpecialAttack: | 1 |
+
+#+BEGIN_SRC mongo :db pokemon
+db.pokedex.update(
+  {"name": "Metapod"},
+  {$push:
+      {"stats":{
+          "attackScore":1,
+          "defenceScore":3,
+          "specialAttack":1
+      }}
+  }
+)
+#+END_SRC
+[[file:../index.org][Home]] > [[file:mongodb.org][MongoDB]] > Herhalingsoefeningen

@@ -1,0 +1,20 @@
+#+TITLE: Oefeningen MongoDB
+#+AUTHOR: Robin Wils
+#+INCLUDE: "../org-options.org"
+#+OPTIONS: toc:nil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../solarized-dark.min.css"/>
+-----
+[[file:../index.org][Home]] > MongoDB \\
+[[https://pxl-college-projects.gitlab.io/big-data-exercises-pxl.gitlab.io/mongodb/mongodb.org][View org source]]
+- [[file:0-Algemeen_Big_Data_Reeks1.org][Algemene oefeningen]]
+- [[file:1-Query_Oefeningen.org][Query oefeningen]]
+- [[file:2-Herhalingsoefeningen.org][Herhalingsoefeningen]]
+
+\\
+
+You can download an [[https://gitlab.com/PXL-college-projects/big-data-exercises-pxl.gitlab.io/-/archive/master/big-data-exercises-pxl.gitlab.io-master.zip?path=public][offline version]] of this website.
+
+This website is generated with GNU Emacs - Org mode. \\
+Feel free to visit my personal site at https://robinwils.gitlab.io.
+
+[[file:../index.org][Home]] > MongoDB

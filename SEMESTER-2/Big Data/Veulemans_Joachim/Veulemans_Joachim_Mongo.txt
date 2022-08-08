@@ -1,0 +1,41 @@
+Opgave 1
+db.restaurants.find({'address.street':{$regex:/Avenue/}},{_id:0,name:1,'address.building':1,'address.street':1,'address.zipcode':1})
+
+Opgave 2
+A)
+db.restaurants.find({$and:[{cuisine:'Italian'},{dietary:{$regex:/nut free /}},{dietary:{$regex:/lactose free /}}]},{grades:0,address:0})
+B)
+Er zijn geen restaurants die aan de criteria voldoen.
+
+Opgave 3
+A)
+db.restaurants.find({$and:[{$or:[{cuisine:'Delicatessen'},{cuisine:'Chinese'}]},{borough:'Queens'}]},{_id:0, name:1, address:1, cuisine:1})
+B)
+Steve Chu'S Deli & Grocery
+Sal'S Deli
+Ho Mei Restaurant
+Tony'S Deli
+
+Opgave 4
+A)
+db.restaurants.find({$and:[{'grades.score':{$gte:50}},{'grades.score':{$lte:60}}]},{_id:0,name:1})
+B)
+May May Kitchen
+Polish National Home
+Como Pizza
+
+Opgave 5
+A)
+db.restaurants.find({cuisine:'American'}, {_id:0, name:1}).sort({name:1}).skip(19).limit(1)
+B)
+Mejlander & Mulgannon
+
+Opgave 6
+use pokemon
+db.createCollection('pokedex')
+
+Opgave 7
+db.pokemon.insert([{_id:'001',name:'Squirtle',type:'water',sort:['tiny turtle'],evolution:['Wartortle', 'Blastoise']},{_id:'002',name:'Wartortle',type:'water',weakness:'electric'},{_id:'003',name:'Bulbasaur',type:['grass', 'poison'],stats:[{AttackScore:3},{DefenceScore:2},{Speed:3}]}])
+
+Opgave 8
+db.pokemon.update({type:{$regex:/water/}},{$push:{sort:'worm',capacity:'torrent'}})

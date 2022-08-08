@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-08-14 Wed 16:38 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Oefeningen PL/SQL - Hoofdstuk 2: Functies</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Robin Wils" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../solarized-dark.min.css"/>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Oefeningen PL/SQL - Hoofdstuk 2: Functies</h1>
+<hr />
+<p>
+<a href="../index.html">Home</a> &gt; <a href="plsql.html">PLSQL</a> &gt; Functies <br />
+<a href="https://pxl-college-projects.gitlab.io/big-data-exercises-pxl.gitlab.io/plsql/functies.org">View org source</a>
+</p>
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org8e6a94e">Hoe kan ik functies uitvoeren?</a></li>
+<li><a href="#org37aa4da">Opgave 1</a></li>
+<li><a href="#org5332f70">Opgave 2</a></li>
+<li><a href="#orgc134ead">Opgave 3</a></li>
+<li><a href="#org383ce3c">Opgave 4</a></li>
+<li><a href="#org0a9f9fc">Opgave 5</a></li>
+<li><a href="#orgc70fdd3">Opgave 6</a></li>
+<li><a href="#org3d14e3a">Opgave 7</a></li>
+<li><a href="#org2434b78">Opgave 8</a></li>
+<li><a href="#org62f5fc8">Opgave 9</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8e6a94e" class="outline-2">
+<h2 id="org8e6a94e">Hoe kan ik functies uitvoeren?</h2>
+<div class="outline-text-2" id="text-org8e6a94e">
+<p>
+Maak een .sql bestand met je functie in en slaag dit bestand op.
+Het kan handig zijn als je het bestand waarmee je de PLSQL omgeving opent in 
+dezelfde folder hebt staat.
+</p>
+
+<p>
+Typ "START &lt;functienaam&gt;" in je PLSQL omgeving om de functie aan te maken.
+Je kan in te plaats van de functienaam het path naar het bestand ingeven.
+Dit is handig indien je PLSQL omgeving vanuit een andere folder word gestart.
+</p>
+
+<p>
+Typ "SELECT &lt;functienaam&gt; FROM dual;" in je PLSQL omgeving om deze functie 
+uit te voeren.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org37aa4da" class="outline-2">
+<h2 id="org37aa4da">Opgave 1</h2>
+<div class="outline-text-2" id="text-org37aa4da">
+<p>
+Schrijf een functie ‘dagen_einde_maand’ die berekent hoeveel dagen er liggen 
+tussen nu (=systeemdatum) en het einde van deze maand. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">FUNCTION</span> <span style="color: #A89984;">dagen_einde_maand</span>
+<span style="color: #DD6F48;">RETURN</span> <span style="color: #DD6F48;">NUMBER</span>
+<span style="color: #DD6F48;">AS</span>
+  v_number <span style="color: #DD6F48;">NUMBER</span>;
+<span style="color: #DD6F48;">BEGIN</span>
+  <span style="color: #DD6F48;">RETURN</span> LAST_DAY(sysdate) - sysdate;
+<span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/functies/dagen_einde_maand.sql">sql bestand</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5332f70" class="outline-2">
+<h2 id="org5332f70">Opgave 2</h2>
+<div class="outline-text-2" id="text-org5332f70">
+<p>
+Schrijf een functie ‘aantal_dienstjaren’ om na te gaan hoe lang een specifieke 
+werknemer reeds in dienst is. Als parameter wordt datum van indiensttreding 
+van de werknemer meegegeven. De functie geeft het aantal volledige dienstjaren 
+terug. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">FUNCTION</span> <span style="color: #A89984;">aantal_dienstjaren</span>
+(p_hire_date employees.hire_date%<span style="color: #DD6F48;">type</span>)
+<span style="color: #DD6F48;">RETURN</span> <span style="color: #DD6F48;">NUMBER</span>
+<span style="color: #DD6F48;">AS</span>
+<span style="color: #DD6F48;">BEGIN</span>
+  <span style="color: #DD6F48;">RETURN</span> TRUNC(months_between(sysdate, p_hire_date)/12);
+<span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/functies/aantal_dienstjaren.sql">sql bestand</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc134ead" class="outline-2">
+<h2 id="orgc134ead">Opgave 3</h2>
+<div class="outline-text-2" id="text-orgc134ead">
+<p>
+a) Schrijf een functie ‘netto’ om het netto salaris van een 
+werknemer te berekenen. Als parameter wordt het bruto salaris 
+meegegeven. De belastingen bedragen 40% van het bruto salaris. 
+Het netto salaris moet teruggegeven worden als vb 9,456.55 euro. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">FUNCTION</span> <span style="color: #A89984;">netto</span>
+(p_salary employees.salary%<span style="color: #DD6F48;">type</span>)
+<span style="color: #DD6F48;">RETURN</span> VARCHAR2
+<span style="color: #DD6F48;">AS</span>
+  v_netto employees.salary%<span style="color: #DD6F48;">type</span>;
+<span style="color: #DD6F48;">BEGIN</span>
+  v_netto := p_salary * 0.6;
+  <span style="color: #DD6F48;">RETURN</span> to_char(v_netto, <span style="color: #528B8B;">'9,999.00'</span>) || <span style="color: #528B8B;">' euro'</span>;
+<span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/functies/netto-3a.sql">sql bestand</a>
+</p>
+
+<p>
+b) Herschrijf de functie ‘netto’ zodat de belastingen in 
+schijven berekend worden. Op de eerste 10 000 euro betaal je 
+40% belastingen, op de volgende 6000 euro betaal je 50% 
+belastingen en op de hoogste inkomensschijf betaal je 60% 
+belastingen. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">FUNCTION</span> <span style="color: #A89984;">netto</span>
+(p_salary employees.salary%<span style="color: #DD6F48;">type</span>)
+<span style="color: #DD6F48;">RETURN</span> VARCHAR2
+<span style="color: #DD6F48;">AS</span>
+  v_netto employees.salary%<span style="color: #DD6F48;">type</span>;
+<span style="color: #DD6F48;">BEGIN</span>
+  IF p_salary &lt;= 10000 <span style="color: #DD6F48;">THEN</span>
+    v_netto := p_salary * 0.6;
+  ELSIF p_salary &lt;= 16000 <span style="color: #DD6F48;">THEN</span>
+    v_netto := 10000 * 0.6 + (p_salary-10000) * 0.5;
+  <span style="color: #DD6F48;">ELSE</span>
+    v_netto := 10000 * 0.6 + 6000 * 0.5 + (p_salary-16000) * 0.4;
+  <span style="color: #DD6F48;">END</span> IF;
+  <span style="color: #DD6F48;">RETURN</span> to_char(v_netto, <span style="color: #528B8B;">'9,999.00'</span>) || <span style="color: #528B8B;">' euro'</span>;
+<span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/functies/netto-3b.sql">sql bestand</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org383ce3c" class="outline-2">
+<h2 id="org383ce3c">Opgave 4</h2>
+<div class="outline-text-2" id="text-org383ce3c">
+<p>
+a) Schrijf een functie ‘schrikkeljaar’ om na te gaan of 
+het huidige jaar een schrikkeljaar is of niet. De functie geeft terug 
+‘het jaar xxx is een schrikkeljaar’ of ‘het jaar xxx is geen schrikkeljaar’.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">FUNCTION</span> <span style="color: #A89984;">schrikkeljaar</span>
+<span style="color: #DD6F48;">RETURN</span> VARCHAR2
+<span style="color: #DD6F48;">AS</span>
+  v_year VARCHAR2(4):= TO_CHAR(SYSDATE, <span style="color: #528B8B;">'YYYY'</span>);
+<span style="color: #DD6F48;">BEGIN</span>
+  IF <span style="color: #FE8019;">MOD</span>(v_year, 4) = 0 <span style="color: #DD6F48;">THEN</span>
+    <span style="color: #DD6F48;">RETURN</span> <span style="color: #528B8B;">'Het jaar '</span> || v_year || <span style="color: #528B8B;">' is een schrikkeljaar.'</span>;
+  <span style="color: #DD6F48;">ELSE</span>
+    <span style="color: #DD6F48;">RETURN</span> <span style="color: #528B8B;">'Het jaar '</span> || v_year || <span style="color: #528B8B;">' is geen schrikkeljaar.'</span>;
+  <span style="color: #DD6F48;">END</span> IF;
+<span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/functies/schrikkeljaar-4a.sql">sql bestand</a>
+</p>
+
+<p>
+b) Herschrijf de functie ‘schrikkeljaar’ zodat voor elk 
+jaar kan bepaald worden of het een schrikkeljaar is of niet. 
+Gebruik een parameter.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">FUNCTION</span> <span style="color: #A89984;">schrikkeljaar</span>
+(p_year VARCHAR2)
+<span style="color: #DD6F48;">RETURN</span> VARCHAR2
+<span style="color: #DD6F48;">AS</span>
+<span style="color: #DD6F48;">BEGIN</span>
+  IF <span style="color: #FE8019;">MOD</span>(p_year, 4) = 0 <span style="color: #DD6F48;">THEN</span>
+    <span style="color: #DD6F48;">RETURN</span> <span style="color: #528B8B;">'Het jaar '</span> || p_year || <span style="color: #528B8B;">' is een schrikkeljaar.'</span>;
+  <span style="color: #DD6F48;">ELSE</span>
+    <span style="color: #DD6F48;">RETURN</span> <span style="color: #528B8B;">'Het jaar '</span> || p_year || <span style="color: #528B8B;">' is geen schrikkeljaar.'</span>;
+  <span style="color: #DD6F48;">END</span> IF;
+<span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/functies/schrikkeljaar-4b.sql">sql bestand</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0a9f9fc" class="outline-2">
+<h2 id="org0a9f9fc">Opgave 5</h2>
+<div class="outline-text-2" id="text-org0a9f9fc">
+<p>
+Elke eerste maandag van de maand gaat een vergadering door. Schrijf een 
+functie 'volgende_vergadering' die de datum toont van de eerstvolgende 
+vergadering. 
+</p>
+
+<p>
+Let op: 1 januari en 1 mei zijn wettelijke feestdagen. Als de eerste maandag 
+van de maand op 1 van deze data valt, dan wordt er vergaderd op dinsdag. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">FUNCTION</span> <span style="color: #A89984;">volgende_vergadering</span>
+<span style="color: #DD6F48;">RETURN</span> <span style="color: #66999D;">DATE</span>
+<span style="color: #DD6F48;">AS</span>
+  v_meeting <span style="color: #66999D;">DATE</span>;
+<span style="color: #DD6F48;">BEGIN</span>
+  v_meeting := LAST_DAY(sysdate)+1;
+
+  IF to_char(v_meeting,<span style="color: #528B8B;">'fmday'</span>)!=<span style="color: #528B8B;">'monday'</span>
+  <span style="color: #DD6F48;">THEN</span>
+    v_meeting := NEXT_DAY(v_meeting,<span style="color: #528B8B;">'monday'</span>);
+  <span style="color: #DD6F48;">END</span> IF;  
+  IF to_char(v_meeting,<span style="color: #528B8B;">'dd-mm'</span>) = <span style="color: #528B8B;">'01-01'</span>
+  <span style="color: #DD6F48;">OR</span> to_char(v_meeting,<span style="color: #528B8B;">'dd-mm'</span>) = <span style="color: #528B8B;">'01-05'</span>
+  <span style="color: #DD6F48;">THEN</span>
+    v_meeting := v_meeting + 1;
+  <span style="color: #DD6F48;">END</span> IF;
+  <span style="color: #DD6F48;">RETURN</span> v_meeting;
+<span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/functies/volgende_vergadering.sql">sql bestand</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc70fdd3" class="outline-2">
+<h2 id="orgc70fdd3">Opgave 6</h2>
+<div class="outline-text-2" id="text-orgc70fdd3">
+<p>
+Stel dat er geen sequence is om een id voor nieuwe employees toe te kennen. 
+Maak een functie ‘next_employee_id’ die het hoogste employee_id ophaalt, 
+dit ophoogt met 1 en die waarde terugstuurt.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">FUNCTION</span> <span style="color: #A89984;">next_employee_id</span>
+<span style="color: #DD6F48;">RETURN</span> employees.employee_id%<span style="color: #DD6F48;">type</span>
+<span style="color: #DD6F48;">AS</span>
+    v_id employees.employee_id%<span style="color: #DD6F48;">type</span>;
+<span style="color: #DD6F48;">BEGIN</span>
+    <span style="color: #DD6F48;">SELECT</span> <span style="color: #FE8019;">max</span>(employee_id) <span style="color: #DD6F48;">INTO</span> v_id
+    <span style="color: #DD6F48;">FROM</span> employees;
+    <span style="color: #DD6F48;">RETURN</span> v_id + 1;
+<span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="sql-files/functies/next_employee_id.sql">sql bestand</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3d14e3a" class="outline-2">
+<h2 id="org3d14e3a">Opgave 7</h2>
+<div class="outline-text-2" id="text-org3d14e3a">
+<p>
+Maak een functie voor de berekening van het (bruto)jaarloon van een werknemer. 
+Houd hierbij rekening met het commissiepercentage. Als parameter komt het 
+employee_id van de werknemer binnen.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">FUNCTION</span> <span style="color: #A89984;">get_jaarloon</span>
+(p_employee_id employees.employee_id%<span style="color: #DD6F48;">type</span>)
+<span style="color: #DD6F48;">RETURN</span> employees.salary%<span style="color: #DD6F48;">type</span>
+<span style="color: #DD6F48;">AS</span>
+  v_bruto employees.salary%<span style="color: #DD6F48;">type</span>;
+<span style="color: #DD6F48;">BEGIN</span>
+  <span style="color: #DD6F48;">SELECT</span> (salary + nvl(salary*commission_pct,0))*12 
+  <span style="color: #DD6F48;">INTO</span> v_bruto
+  <span style="color: #DD6F48;">FROM</span> employees
+  <span style="color: #DD6F48;">WHERE</span> employee_id = p_employee_id;
+  <span style="color: #DD6F48;">RETURN</span> v_bruto;
+<span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/functies/get_jaarloon.sql">sql bestand</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2434b78" class="outline-2">
+<h2 id="org2434b78">Opgave 8</h2>
+<div class="outline-text-2" id="text-org2434b78">
+<p>
+Maak een functie die de naam en voornaam teruggeeft van de persoon die hoofd is 
+van de afdeling waar de meeste werknemers werken. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">FUNCTION</span> <span style="color: #A89984;">hoofd_meeste_werknemers</span>
+<span style="color: #DD6F48;">RETURN</span> VARCHAR2
+<span style="color: #DD6F48;">AS</span>
+  v_department_id employees.department_id%<span style="color: #DD6F48;">type</span>;
+  v_aantal <span style="color: #DD6F48;">NUMBER</span>;
+  v_manager_id employees.manager_id%<span style="color: #DD6F48;">type</span>;
+  v_first_name employees.first_name%<span style="color: #DD6F48;">type</span>;
+  v_last_name employees.last_name%<span style="color: #DD6F48;">type</span>;
+<span style="color: #DD6F48;">BEGIN</span>
+  <span style="color: #DD6F48;">SELECT</span> department_id, <span style="color: #FE8019;">count</span>(employee_id)
+  <span style="color: #DD6F48;">INTO</span> v_department_id, v_aantal
+  <span style="color: #DD6F48;">FROM</span> employees
+  <span style="color: #DD6F48;">GROUP</span> <span style="color: #DD6F48;">BY</span> department_id
+  <span style="color: #DD6F48;">HAVING</span> <span style="color: #FE8019;">count</span>(employee_id) = (<span style="color: #DD6F48;">SELECT</span> <span style="color: #FE8019;">max</span>(<span style="color: #FE8019;">count</span>(employee_id))
+  <span style="color: #DD6F48;">FROM</span> employees
+  <span style="color: #DD6F48;">GROUP</span> <span style="color: #DD6F48;">BY</span> department_id);
+  <span style="color: #DD6F48;">SELECT</span> manager_id
+  <span style="color: #DD6F48;">INTO</span> v_manager_id
+  <span style="color: #DD6F48;">FROM</span> departments
+  <span style="color: #DD6F48;">WHERE</span> department_id = v_department_id;
+  <span style="color: #DD6F48;">SELECT</span> first_name , last_name
+  <span style="color: #DD6F48;">INTO</span> v_first_name, v_last_name
+  <span style="color: #DD6F48;">FROM</span> employees
+  <span style="color: #DD6F48;">WHERE</span> employee_id = v_manager_id;
+  <span style="color: #DD6F48;">RETURN</span> v_first_name || <span style="color: #528B8B;">' '</span> || v_last_name;
+<span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/functies/hoofd_meeste_werknemers.sql">sql bestand</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org62f5fc8" class="outline-2">
+<h2 id="org62f5fc8">Opgave 9</h2>
+<div class="outline-text-2" id="text-org62f5fc8">
+<p>
+Schrijf een functie ‘get_jubileumdatum’ om te berekenen wanneer een bepaalde 
+werknemer 25 jaar in dienst is, en dus gevierd gaat worden.Het feest vindt 
+plaats op de eerste vrijdag volgend op de dag waarop hij 25 jaar in dienst is, 
+tenzij dat net een vrijdag is, dan is het onmiddellijk feest. 
+</p>
+
+<p>
+Let op:  als deze datum al voorbij is wordt als resultaat van de functie 
+teruggekeerd ‘werd reedsgevierd’. Invoerparameters: familienaam en voornaam 
+van de werknemer waarvoor de jubileumsdatum opgezocht wordt. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">FUNCTION</span> <span style="color: #A89984;">get_jubileumdatum</span>
+(p_last_name employees.last_name%<span style="color: #DD6F48;">type</span>, p_first_name employees.first_name%<span style="color: #DD6F48;">type</span>)
+<span style="color: #DD6F48;">RETURN</span> VARCHAR2
+<span style="color: #DD6F48;">AS</span>
+  v_hire_date <span style="color: #66999D;">DATE</span>;
+  v_jubileum <span style="color: #66999D;">DATE</span>;
+<span style="color: #DD6F48;">BEGIN</span>
+  <span style="color: #DD6F48;">SELECT</span> hire_date
+  <span style="color: #DD6F48;">INTO</span> v_hire_date
+  <span style="color: #DD6F48;">FROM</span> employees
+  <span style="color: #DD6F48;">WHERE</span> last_name = p_last_name
+  <span style="color: #DD6F48;">AND</span> first_name = p_first_name;
+
+  v_jubileum := add_months(v_hire_date, 25*12);
+  IF to_char(v_jubileum, <span style="color: #528B8B;">'d'</span>) != 6 
+  <span style="color: #DD6F48;">THEN</span>
+<span style="color: #7C6F64;">-- Eerste dag van de week is zondag in plsql. Dit controleert of het vrijdag is </span>
+<span style="color: #7C6F64;">-- en als dat niet het geval is neemt het de volgende vrijdag</span>
+    v_jubileum := next_day(v_jubileum, <span style="color: #528B8B;">'fri'</span>);
+  <span style="color: #DD6F48;">END</span> IF;
+  IF v_jubileum &lt; sysdate
+  <span style="color: #DD6F48;">THEN</span>
+    <span style="color: #DD6F48;">RETURN</span> <span style="color: #528B8B;">'Al gevierd'</span>;
+  <span style="color: #DD6F48;">ELSE</span> 
+    <span style="color: #DD6F48;">RETURN</span> to_char(v_jubileum);
+  <span style="color: #DD6F48;">END</span> IF;
+<span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/functies/get_jubileumdatum.sql">sql bestand</a> <br />
+<a href="../index.html">Home</a> &gt; <a href="plsql.html">PLSQL</a> &gt; Functies
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Robin Wils</p>
+<p class="date">Created: 2019-08-14 Wed 16:38</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+    "autoload": {
+        "psr-4": {
+          "database\\": "src/database/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8"
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.3"
+    }
+}

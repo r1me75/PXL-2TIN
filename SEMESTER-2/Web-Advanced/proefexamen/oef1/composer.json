@@ -1,0 +1,12 @@
+{
+  "autoload": {
+      "psr-4": {
+          "Assets\\": "src/assets",
+          "Identifiable\\": "src/identifiable",
+          "Users\\": "src/users"
+      }
+  },
+  "require": {
+    "ext-pdo": "*"
+  }
+}

@@ -1,0 +1,2 @@
+#+LANG: en
+#+OPTIONS: html-scripts:nil num:nil, ^:nil toc:nil

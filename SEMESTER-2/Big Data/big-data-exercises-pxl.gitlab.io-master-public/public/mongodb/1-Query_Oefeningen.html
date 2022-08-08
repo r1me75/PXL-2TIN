@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-08-14 Wed 16:40 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Oefeningen MongoDB - query MongoDB</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Robin Wils" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../solarized-dark.min.css"/>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Oefeningen MongoDB - query MongoDB</h1>
+<hr />
+<p>
+<a href="../index.html">Home</a> &gt; <a href="mongodb.html">MongoDB</a> &gt; Query oefeningen <br />
+<a href="https://pxl-college-projects.gitlab.io/big-data-exercises-pxl.gitlab.io/mongodb/1-Query_Oefeningen.org">View org source</a> <br />
+</p>
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgf0452cc">PROJECTIE</a>
+<ul>
+<li><a href="#orgdf26f71">Opgave 1</a></li>
+<li><a href="#orga154b8e">Opgave 2</a></li>
+</ul>
+</li>
+<li><a href="#org90c8489">SORT-LIMIT-SKIP-COUNT</a>
+<ul>
+<li><a href="#orgf276416">Opgave 3</a></li>
+<li><a href="#orgfb16eeb">Opgave 4</a></li>
+<li><a href="#org30bb679">Opgave 5</a></li>
+<li><a href="#org3c3be6d">Opgave 6</a></li>
+<li><a href="#orgc693e4a">Opgave 7</a></li>
+</ul>
+</li>
+<li><a href="#orgbef02d9">SELECTIE</a>
+<ul>
+<li><a href="#org4906771">Opgave 8</a></li>
+<li><a href="#org7d05aa3">Opgave 9</a></li>
+<li><a href="#org7f469ff">Opgave 10</a></li>
+<li><a href="#org94be2bf">Opgave 11</a></li>
+<li><a href="#org8f781ab">Opgave 12</a></li>
+<li><a href="#orgf890cae">Opgave 13</a></li>
+<li><a href="#org83fe31f">Opgave 14</a></li>
+<li><a href="#org42bf857">Opgave 15</a></li>
+<li><a href="#org039ef44">Opgave 16</a></li>
+<li><a href="#org2d56217">Opgave 17</a></li>
+<li><a href="#org30dacb8">Opgave 18</a></li>
+<li><a href="#org5a45d7b">Opgave 19</a></li>
+<li><a href="#org35c7ed2">Opgave 20</a></li>
+<li><a href="#orgf35b9f8">Opgave 21</a></li>
+<li><a href="#org59aed28">Opgave 22</a></li>
+<li><a href="#org7ca53d9">Opgave 27</a></li>
+<li><a href="#org1a3b3cb">Opgave 28</a></li>
+<li><a href="#orgf224205">Opgave 29</a></li>
+<li><a href="#orgc6ede68">Opgave 30</a></li>
+<li><a href="#org417a1a6">Opgave 31</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf0452cc" class="outline-2">
+<h2 id="orgf0452cc">PROJECTIE</h2>
+<div class="outline-text-2" id="text-orgf0452cc">
+<p>
+<b>Bestudeer eerst de collectie movieDetails in de database video.</b>
+</p>
+</div>
+<div id="outline-container-orgdf26f71" class="outline-3">
+<h3 id="orgdf26f71">Opgave 1</h3>
+<div class="outline-text-3" id="text-orgdf26f71">
+<p>
+Schrijf een query die enkel de titel en de datum dat de film werd uitgebracht 
+(released) toont. <br />
+Opmerking: de _id wordt niet getoond.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find({}, {_id:0 , title:1, year:1})
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga154b8e" class="outline-3">
+<h3 id="orga154b8e">Opgave 2</h3>
+<div class="outline-text-3" id="text-orga154b8e">
+<p>
+Schrijf een query die enkel de titel, de landen waar de film werd gemaakt en 
+de director toont. <br />
+Is het mogelijk om de director te tonen vlak na de titel? <br />
+<i>Nee, NoSQL heeft geen vaste structuur</i>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find({}, {title:1, director:1, countries:1})
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org90c8489" class="outline-2">
+<h2 id="org90c8489">SORT-LIMIT-SKIP-COUNT</h2>
+<div class="outline-text-2" id="text-org90c8489">
+</div>
+<div id="outline-container-orgf276416" class="outline-3">
+<h3 id="orgf276416">Opgave 3</h3>
+<div class="outline-text-3" id="text-orgf276416">
+<p>
+Schrijf een query die de titel en de genres toont, 
+alfabetisch gesorteerd volgens genre. <br />
+Wat valt er op bij de eerste 82 films? <br />
+<i>De eerste films in deze lijst hebben geen genre.</i>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find({}, {title:1, genres:1}).sort({genres:1})
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfb16eeb" class="outline-3">
+<h3 id="orgfb16eeb">Opgave 4</h3>
+<div class="outline-text-3" id="text-orgfb16eeb">
+<p>
+Dezelfde opgave als 3, 
+maar sla de eerste 82 films over en toon vervolgens 15 films. <br />
+Welke film staat eerst?
+<i>Alien: Resurrection</i>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find({}, {title:1, genres:1}).skip(82).limit(15)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org30bb679" class="outline-3">
+<h3 id="org30bb679">Opgave 5</h3>
+<div class="outline-text-3" id="text-org30bb679">
+<p>
+Hoeveel films worden in detail besproken? (Hoeveel films zitten er in 
+dit document)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find().count()
+</pre>
+</div>
+
+<p>
+<i>Er worden 2295 films in detail besproken.</i>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3c3be6d" class="outline-3">
+<h3 id="org3c3be6d">Opgave 6</h3>
+<div class="outline-text-3" id="text-org3c3be6d">
+<p>
+Welke film staat op de 101ste plaats? Geef hiervan enkel de titel en 
+de acteurs weer.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find({}, {_id:0, title:1, actors:1}).skip(100).limit(1)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc693e4a" class="outline-3">
+<h3 id="orgc693e4a">Opgave 7</h3>
+<div class="outline-text-3" id="text-orgc693e4a">
+<p>
+Geef de titel van de 100ste oudste film. <br />
+<i>J.P. Love in Berlin</i>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find({}, {_id:0, title:1}).sort({released:1}).skip(99).limit(1)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbef02d9" class="outline-2">
+<h2 id="orgbef02d9">SELECTIE</h2>
+<div class="outline-text-2" id="text-orgbef02d9">
+<p>
+Ga naar de collectie movies.
+</p>
+</div>
+<div id="outline-container-org4906771" class="outline-3">
+<h3 id="org4906771">Opgave 8</h3>
+<div class="outline-text-3" id="text-org4906771">
+<p>
+Hoeveel films zijn van het jaar 1982? <br />
+<i>22</i>
+</p>
+<div class="org-src-container">
+<pre class="src src-mongo">db.movies.find({year:1982}).count()
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7d05aa3" class="outline-3">
+<h3 id="org7d05aa3">Opgave 9</h3>
+<div class="outline-text-3" id="text-org7d05aa3">
+<p>
+Geef enkel de titel en het jaartal van de films van het jaar 1982.<br />
+Ga naar de collectie movieDetails.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mongo">db.movies.find({year:1982}, {_id:0, title:1, year:1})
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7f469ff" class="outline-3">
+<h3 id="org7f469ff">Opgave 10</h3>
+<div class="outline-text-3" id="text-org7f469ff">
+<p>
+Geef enkel de titel weer van de films waar Stanley Kubrick director van is.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-mongo">db.movies.find({director:<span style="color: #528B8B;">"Stanley Kubrick"</span>}, {_id:0, title:1})
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org94be2bf" class="outline-3">
+<h3 id="org94be2bf">Opgave 11</h3>
+<div class="outline-text-3" id="text-org94be2bf">
+<p>
+Bij hoeveel films staat er UNRATED bij het veld rated? <br />
+<i>32</i>
+</p>
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find({rated:<span style="color: #528B8B;">"UNRATED"</span>}).count()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8f781ab" class="outline-3">
+<h3 id="org8f781ab">Opgave 12</h3>
+<div class="outline-text-3" id="text-org8f781ab">
+<p>
+Hoeveel films zijn er waarbij de acteur Jeff Bennett meespeelt? <br />
+<i>1</i>
+</p>
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find({actors:<span style="color: #528B8B;">'Jeff Bennett'</span>}).count()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf890cae" class="outline-3">
+<h3 id="orgf890cae">Opgave 13</h3>
+<div class="outline-text-3" id="text-orgf890cae">
+<p>
+Van welke films is George Lucas de director? Geef de films alfabetisch op 
+titel weer.
+</p>
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find(
+  {director:<span style="color: #528B8B;">'George Lucas'</span>},
+  {_id:0, title:1}
+).sort({title:1})
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org83fe31f" class="outline-3">
+<h3 id="org83fe31f">Opgave 14</h3>
+<div class="outline-text-3" id="text-org83fe31f">
+<p>
+Hoeveel films duren langer dan 2 uur? <br />
+<i>262</i>
+</p>
+
+<p>
+<b>Ik ben hier niet 100% zeker van sinds we de eenheid van het field "runtime" 
+niet kennen. Ik vermoed dat het in minuten staat.</b>
+</p>
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find(
+  {runtime: {$gt: 120}}
+).count()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org42bf857" class="outline-3">
+<h3 id="org42bf857">Opgave 15</h3>
+<div class="outline-text-3" id="text-org42bf857">
+<p>
+Geef enkel de titel weer van de films waarbij acteurs met voornaam Gary in
+meespelen. Geef de films alfabetisch gesorteerd weer.
+</p>
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find(
+  {actors: {$in: [<span style="color: #528B8B;">/^Gary/</span>]}},
+  {_id:0, title:1}
+).sort({title:1})
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org039ef44" class="outline-3">
+<h3 id="org039ef44">Opgave 16</h3>
+<div class="outline-text-3" id="text-org039ef44">
+<p>
+Hoeveel films zijn van het jaar 2000 of 2010? <br />
+<i>160</i>
+</p>
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find(
+  {year: {$in: [2000,2010]}}
+).count()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2d56217" class="outline-3">
+<h3 id="org2d56217">Opgave 17</h3>
+<div class="outline-text-3" id="text-org2d56217">
+<p>
+Geef enkel de titel en het jaartal weer van de films van de jaren gelegen 
+tussen 2014 en 2017 (inclusief), 
+gesorteerd volgens ouderdom. <br />
+Welke film staat eerst?
+</p>
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find(
+  {$and:[
+    {year: {$gt: 2013}},
+    {year: {$lt:2018}}
+  ]}
+).sort({year: -1}).pretty()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org30dacb8" class="outline-3">
+<h3 id="org30dacb8">Opgave 18</h3>
+<div class="outline-text-3" id="text-org30dacb8">
+<p>
+Hoeveel films zijn er van Star wars? <br />
+<i>6</i>
+</p>
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find(
+  {title: <span style="color: #528B8B;">/Star wars/</span>i}
+).count()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5a45d7b" class="outline-3">
+<h3 id="org5a45d7b">Opgave 19</h3>
+<div class="outline-text-3" id="text-org5a45d7b">
+<p>
+Welke films zijn zowel in UK als USA uitgebracht en zijn ofwel van het jaar 
+2004 ofwel van 2012? <br />
+Toon enkel titel, jaar en countries in aflopende volgorde van het jaar en 
+daarin oplopende volgorde van de titel. <br />
+<i>De lijst van films lijkt me wat lang om op te sommen.</i>
+</p>
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find(
+  {$and:[
+    {countries: {$in: [<span style="color: #528B8B;">"USA"</span>,<span style="color: #528B8B;">"UK"</span>]}},
+    {year: {$in: [2004,2012]}}
+  ]},
+  {_id:0, title:1, year:1, countries:1}
+).sort({year:1, title:1})
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org35c7ed2" class="outline-3">
+<h3 id="org35c7ed2">Opgave 20</h3>
+<div class="outline-text-3" id="text-org35c7ed2">
+<p>
+Toon alle films die het woord west in de titel hebben en zijn uitgebracht in 
+New Zealand en alle films waarin Bruce Willis meespeelt. <br />
+<i>De acteur Bruce Willes speelt in geen enkele film met een titel waarin "west" 
+voorkomt en die in New Zealand werd uitgebracht.</i> 
+<i>Daardoor hebben we geen resultaten.</i>
+</p>
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find(
+  {$and:[
+    {title: <span style="color: #528B8B;">/west/</span>i},
+    {countries: {$in: [<span style="color: #528B8B;">"New Zealand"</span>]}},
+    {actors: {$in: [<span style="color: #528B8B;">"Bruce Willis"</span>]}}
+  ]},
+  {_id:0, title:1}
+)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf35b9f8" class="outline-3">
+<h3 id="orgf35b9f8">Opgave 21</h3>
+<div class="outline-text-3" id="text-orgf35b9f8">
+<p>
+Toon alle films die niet zijn uitgebracht in USA of UK maar wel in België of 
+Frankrijk. Toon enkel het id, de titel, de producer, de landen van uitgifte en 
+de acteurs van de 51ste film die aan de voorwaarden voldoet.
+</p>
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find(
+  {$and:[
+    {countries: {$nin: [<span style="color: #528B8B;">"USA"</span>,<span style="color: #528B8B;">"UK"</span>]}},
+    {countries: {$in: [<span style="color: #528B8B;">"Belgium"</span>,<span style="color: #528B8B;">"France"</span>]}}
+  ]},
+  {_id:1, title:1, producer:1, countries:1, acteurs:1}
+).skip(50).limit(1).pretty()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org59aed28" class="outline-3">
+<h3 id="org59aed28">Opgave 22</h3>
+<div class="outline-text-3" id="text-org59aed28">
+<p>
+Zie opgave 21 maar pas de find aan om zowel de films die in België als in 
+Frankrijk zijn uitgebracht te tonen. En toon ze allemaal.
+</p>
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find(
+  {$and:[
+    {countries: {$in: [<span style="color: #528B8B;">"USA"</span>,<span style="color: #528B8B;">"UK"</span>]}},
+    {countries: {$in: [<span style="color: #528B8B;">"Belgium"</span>,<span style="color: #528B8B;">"France"</span>]}}
+  ]},
+  {_id:1, title:1, producer:1, countries:1, acteurs:1}
+).pretty()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7ca53d9" class="outline-3">
+<h3 id="org7ca53d9">Opgave 27</h3>
+<div class="outline-text-3" id="text-org7ca53d9">
+<p>
+Hoeveel films hebben als eerste locatie niet USA? <br />
+<i>1398 films.</i>
+</p>
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find(
+  {<span style="color: #528B8B;">"countries.0"</span>: {$ne: <span style="color: #528B8B;">"USA"</span>}}
+).count()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1a3b3cb" class="outline-3">
+<h3 id="org1a3b3cb">Opgave 28</h3>
+<div class="outline-text-3" id="text-org1a3b3cb">
+<p>
+Geef de titel weer van de films waarvoor meer dan 500.000 stemmen werden 
+uitgebracht en die een rating hebben van 8,5 of meer. Geef naast de rating 
+ook het aantal stemmen weer.
+</p>
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find(
+  {$and:[
+    {<span style="color: #528B8B;">"imdb.rating"</span>: {$gt: 8.5}},
+    {<span style="color: #528B8B;">"imdb.votes"</span>: {$gt: 500000}}
+  ]},
+  {_id:0, title:1, <span style="color: #528B8B;">"imdb.rating"</span>:1, <span style="color: #528B8B;">"imdb.votes"</span>:1}
+)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf224205" class="outline-3">
+<h3 id="orgf224205">Opgave 29</h3>
+<div class="outline-text-3" id="text-orgf224205">
+<p>
+Hoeveel films hebben een rating van meer dan 8,5 of hebben meer dan 
+500.000 uitgebrachte stemmen? <br />
+<i>60 films.</i>
+</p>
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find(
+  {$or:[
+    {<span style="color: #528B8B;">"imdb.rating"</span>: {$gt: 8.5}},
+    {<span style="color: #528B8B;">"imdb.votes"</span>: {$gt: 500000}}
+  ]}
+).count()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc6ede68" class="outline-3">
+<h3 id="orgc6ede68">Opgave 30</h3>
+<div class="outline-text-3" id="text-orgc6ede68">
+<p>
+Geef de titel weer van de films waarvoor meer dan 500.000 stemmen werden 
+uitgebracht en die een rating hebben van 8,5 of meer, 
+of films die op de tomato meter 90 of meer hebben. 
+Geef naast de rating ook het aantal stemmen en de tomato meter weer.
+</p>
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find(
+  {$or:[
+    {$and:[
+      {<span style="color: #528B8B;">"imdb.rating"</span>: {$gt: 8.5}},
+      {<span style="color: #528B8B;">"imdb.votes"</span>: {$gt: 500000}}
+    ]},
+    {<span style="color: #528B8B;">"tomato.meter"</span>: {$gt: 90}}
+  ]},
+  {_id:0, title:1, <span style="color: #528B8B;">"imdb.rating"</span>:1, <span style="color: #528B8B;">"imdb.votes"</span>:1, <span style="color: #528B8B;">"tomato.meter"</span>: 1}
+).pretty()
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org417a1a6" class="outline-3">
+<h3 id="org417a1a6">Opgave 31</h3>
+<div class="outline-text-3" id="text-org417a1a6">
+<p>
+Idem opgave 30 maar sorteer volgens aantal stemmen(oplopend) en 
+bij eenzelfde aantal stemmen volgens tomatometer(aflopend). 
+Toon enkel de 10de tot en met 19de film.
+</p>
+<div class="org-src-container">
+<pre class="src src-mongo">db.movieDetails.find(
+  {$or:[
+    {$and:[
+      {<span style="color: #528B8B;">"imdb.rating"</span>: {$gt: 8.5}},
+      {<span style="color: #528B8B;">"imdb.votes"</span>: {$gt: 500000}}
+    ]},
+    {<span style="color: #528B8B;">"tomato.meter"</span>: {$gt: 90}}
+  ]},
+  {_id:0, title:1, <span style="color: #528B8B;">"imdb.rating"</span>:1, <span style="color: #528B8B;">"imdb.votes"</span>:1, <span style="color: #528B8B;">"tomato.meter"</span>: 1}
+).skip(9).limit(9).sort(
+  {<span style="color: #528B8B;">"imdb.votes"</span>:1, <span style="color: #528B8B;">"tomato.meter"</span>: -1}
+).pretty()
+</pre>
+</div>
+<p>
+<a href="../index.html">Home</a> &gt; <a href="mongodb.html">MongoDB</a> &gt; Query oefeningen
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Robin Wils</p>
+<p class="date">Created: 2019-08-14 Wed 16:40</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

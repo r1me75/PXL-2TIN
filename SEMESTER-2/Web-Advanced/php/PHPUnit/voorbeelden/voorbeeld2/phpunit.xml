@@ -1,0 +1,19 @@
+<phpunit bootstrap="vendor/autoload.php">
+    <testsuites>
+       <testsuite name="testsforgame">
+          <directory>./test/game/</directory>
+       </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist
+                addUncoveredFilesFromWhitelist="true"
+                processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src/game/</directory>
+        </whitelist>
+    </filter>
+
+    <logging>
+        <log type="coverage-html" target="./coverage/html/"/>
+    </logging>
+</phpunit>
+

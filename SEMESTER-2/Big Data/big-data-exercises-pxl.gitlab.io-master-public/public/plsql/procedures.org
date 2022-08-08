@@ -1,0 +1,634 @@
+#+TITLE: Oefeningen PL/SQL - Hoofdstuk 3: Procedures
+#+AUTHOR: Robin Wils
+#+INCLUDE: "../org-options.org"
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../solarized-dark.min.css"/>
+-----
+[[file:../index.org][Home]] > [[file:plsql.org][PLSQL]] > Procedures \\
+[[https://pxl-college-projects.gitlab.io/big-data-exercises-pxl.gitlab.io/plsql/procedures.org][View org source]]
+
+#+TOC: headlines
+
+** Hoe voer ik procedures uit?
+Een procedure kan je aanmaken door op de SQL‐prompt in te tikken:
+#+BEGIN_SRC
+SQL> START <filepath>/procedure_naam
+#+END_SRC
+
+Je kan procedure output toestaan door het volgende op de SQL‐prompt 
+in te tikken (Dit moet je opnieuw doen als je opnieuw inlogt):
+#+BEGIN_SRC
+SQL> SET serveroutput on
+#+END_SRC
+
+Een procedure kan je uitvoeren door op de SQL‐prompt in te tikken:
+#+BEGIN_SRC
+SQL> EXEC procedure_naam
+#+END_SRC
+
+Een procedure kan je verwijderen door op de SQL‐prompt in te tikken:
+#+BEGIN_SRC
+SQL> DROP PROCEDURE procedure_naam;
+#+END_SRC
+** Opgave 1 
+Schrijf een procedure ‘toon_laatste_emp’ die in de medewerkerstabel zoekt naar 
+de laatst aangeworven medewerker. Toon het nummer, de naam en de 
+aanwervingsdatum van deze medewerker.   
+
+Alvorens de procedure uit te voeren, geef je het volgende in: \\
+#+BEGIN_SRC plsql
+UPDATE employees
+SET hire_date = '20‐apr‐00'
+WHERE employee_id =173;
+#+END_SRC
+
+Deze procedure kan je uitvoeren door op de SQL‐prompt in te tikken:
+#+BEGIN_SRC
+SQL> EXEC toon_laatste_emp
+#+END_SRC
+
+/Er staat een trigger op dat update commando./
+/De naam van deze trigger wordt getoont in de error-message wanneer je het
+commando uitvoert. Je kan deze trigger droppen via het volgende commando./
+
+#+BEGIN_SRC
+SQL> DROP TRIGGER secure_employees;
+#+END_SRC
+
+#+BEGIN_SRC plsql
+CREATE OR REPLACE PROCEDURE toon_laatste_emp
+IS
+  v_emp_id employees.employee_id%type;
+  v_emp_name employees.last_name%type;
+  v_emp_hire_date employees.hire_date%type;
+BEGIN
+  SELECT employee_id, last_name, hire_date
+  INTO v_emp_id, v_emp_name, v_emp_hire_date
+  FROM (
+    SELECT employee_id, first_name, last_name, hire_date
+    FROM employees
+    ORDER BY hire_date 
+    DESC
+  ) 
+  WHERE ROWNUM = 1;
+
+  DBMS_OUTPUT.PUT_LINE(
+    v_emp_id || ':' || v_emp_name || ':' || v_emp_hire_date
+  );
+END;
+/
+#+END_SRC
+[[file:../sql-files/procedures/toon_laatste_emp.sql][sql bestand]]
+
+** Opgave 2 
+Schrijf een procedure (grootste_dept) die de departementsnaam van het 
+departement met de meeste employees opzoekt en van dit departement de naam 
+afdrukt samen met de naam, voornaam en het salaris van de employee uit dit 
+departement met het hoogste salaris.  
+
+#+BEGIN_SRC plsql
+CREATE OR REPLACE PROCEDURE grootste_dept
+IS
+  v_dept_id departments.department_id%type;
+  v_dept_name departments.department_name%type;
+  v_name employees.last_name%type;
+  v_firstname employees.first_name%type;
+  v_salary employees.salary%type;
+BEGIN
+  SELECT department_name, department_id
+  INTO v_dept_name, v_dept_id
+  FROM departments 
+  JOIN employees
+  USING(department_id)
+  GROUP BY department_name, department_id
+  HAVING COUNT(employees.employee_id) = (
+    SELECT MAX(COUNT(*))
+    FROM employees
+    GROUP BY department_id
+  );
+  SELECT last_name, first_name, salary
+  INTO v_name, v_firstname, v_salary
+  FROM employees 
+  JOIN departments 
+  USING (department_id)
+  WHERE department_name = v_dept_name
+  AND employees.salary = (
+    SELECT MAX(salary)
+    FROM employees
+    WHERE department_id = v_dept_id
+  );
+  DBMS_OUTPUT.PUT_LINE(
+    'Department: ' || 
+    v_dept_name ||
+    chr(13) ||
+    chr(10) ||
+    'Highest salary: ' ||
+    v_name ||
+    ' ' || 
+    v_salary
+  );
+END;
+/
+#+END_SRC
+[[file:../sql-files/procedures/grootste_dept.sql][sql bestand]]
+
+Deze procedure kan je uitvoeren door op de SQL‐prompt in te tikken:
+#+BEGIN_SRC
+SQL> EXEC grootste_dept 
+#+END_SRC
+
+** Opgave 3 
+Schrijf een procedure (minimumlonen) die ervoor zorgt dat als in een 
+bepaald land nieuwe wetgeving van kracht gaat ivm minimumlonen, 
+de eventueel nodige salarisaanpassingen van de employees gemakkelijk in 
+de databank doorgevoerd kunnen worden.
+
+Invoerparameters: de landnaam en het nieuwe minimumloon dat daar vanaf 
+nu geldig is. \\
+Bewaar deze procedure als proc_minimumlonen.sql om in opdracht 4 te kunnen 
+wijzigen.
+
+#+BEGIN_SRC plsql
+CREATE OR REPLACE PROCEDURE minimumlonen(
+  p_country_name IN countries.country_name%type, 
+  p_min_salary IN employees.salary%type
+)
+IS
+BEGIN
+  UPDATE employees
+  SET salary = p_min_salary
+  WHERE department_id 
+  IN (
+    SELECT department_id
+    FROM departments
+    WHERE location_id 
+    IN (
+      SELECT location_id
+      FROM locations
+      WHERE country_id
+      IN (
+        SELECT country_id
+        FROM countries
+        WHERE country_name = p_country_name
+      )
+    )
+  )
+  AND salary < p_min_salary;
+END;
+/
+#+END_SRC
+[[file:../sql-files/procedures/proc_minimumlonen.sql][sql bestand]]
+
+Deze procedure kan je uitvoeren door aan de SQL‐prompt in te tikken:
+#+BEGIN_SRC
+SQL> EXEC minimumlonen('Canada',6250) 
+#+END_SRC
+
+Controleer vooraf even of er een employee is uit Canada die minder 
+verdient dan 6250. En check dan achteraf of er een aanpassing heeft 
+plaatsgevonden. 
+
+Je kan dit checken via het volgende commando. \\ 
+(Rechtermuisnop is plakken, yank niet na het voor de GNU Emacs gebruikers.)
+
+#+BEGIN_SRC plsql
+SELECT salary
+FROM employees 
+JOIN departments
+USING (department_id)
+JOIN locations
+USING (location_id)
+JOIN countries
+USING (country_id)
+WHERE country_id = 'CA';
+#+END_SRC
+** Opgave 4 
+Wijzig de procedure uit opdracht 3 zodat het calling programma 
+een melding terugkrijgt van het aantal gewijzigde records/rijen en dit 
+afdrukt: 
+
+- via een anoniem block 
+- via een bind‐variable
+
+#+BEGIN_SRC plsql
+CREATE OR REPLACE PROCEDURE minimumlonen(
+  p_country_name IN countries.country_name%type, 
+  p_min_salary IN employees.salary%type,
+  p_rowcount OUT NUMBER
+)
+IS
+BEGIN
+  UPDATE employees
+  SET salary = p_min_salary
+  WHERE department_id 
+  IN (
+    SELECT department_id
+    FROM departments
+    WHERE location_id 
+    IN (
+      SELECT location_id
+      FROM locations
+      WHERE country_id
+      IN (
+        SELECT country_id
+        FROM countries
+        WHERE country_name = p_country_name
+      )
+    )
+  )
+  AND salary < p_min_salary;
+  p_rowcount := SQL%rowcount;
+END;
+/
+#+END_SRC
+[[file:../sql-files/procedures/minimumlonen.sql][sql bestand]]
+
+Je kan dit programma als volgt oproepen (bind-variable):
+
+#+BEGIN_SRC
+SQL> VARIABLE b_v_rowcount NUMBER;
+SQL> EXEC minimumlonen('Canada',6250,:b_v_rowcount)
+#+END_SRC
+
+Dit is hoe het caller programma eruit kan zien (anoniem block):
+
+#+BEGIN_SRC plsql
+DECLARE
+  v_rowcount NUMBER;
+BEGIN
+  minimumlonen('Canada', 2000, v_rowcount);
+  DBMS_OUTPUT.PUT_LINE(v_rowcount);
+END;
+/
+#+END_SRC
+[[file:../sql-files/procedures/minimumlonen_caller.sql][sql bestand]]
+
+Je kan de **functie** als volgt oproepen:
+#+BEGIN_SRC
+SQL> START <pathNaarBestand>/minimumlonen_caller
+#+END_SRC
+
+** Opgave 5 
+Maak een procedure (asterisk_sal) die van een opgegeven werknemer 
+(employee_id) het salaris in sterretjes afdrukt. Elke ster vertegenwoordigt 
+1000 euro.
+
+#+BEGIN_SRC plsql
+CREATE OR REPLACE PROCEDURE asterisk_sal(
+   p_employee_id IN employees.employee_id%type
+)
+AS
+  v_salary employees.salary%type;
+  v_asterisks VARCHAR2(50);
+BEGIN
+  SELECT salary 
+  INTO v_salary
+  FROM employees
+  WHERE employee_id = p_employee_id;
+
+  FOR i IN 1 .. ROUND(v_salary/1000)
+  LOOP v_asterisks := v_asterisks || '*';
+  END LOOP;
+  DBMS_OUTPUT.PUT_LINE(
+    v_asterisks
+  );
+
+  END;
+/
+#+END_SRC
+[[file:../sql-files/procedures/asterisk_sal.sql][sql bestand]]
+
+Deze procedure kan je uitvoeren door aan de SQL‐prompt in te tikken: 
+#+BEGIN_SRC
+SQL> EXEC asterisk_sal(100) 
+#+END_SRC
+
+** Opgave 6 
+Wijzig de procedure uit opdracht 5 zodat het calling program het aantal 
+sterretjes terugkrijgt en dit afdrukt: 
+
+- via een anoniem block 
+- via een bind‐variable 
+
+#+BEGIN_SRC plsql
+CREATE OR REPLACE PROCEDURE asterisk_sal(  
+  p_employee_id IN employees.employee_id%type,
+  p_asterisks OUT VARCHAR2
+)
+AS
+  v_salary employees.salary%type;
+  v_asterisks VARCHAR2(50);
+BEGIN
+  SELECT salary 
+  INTO v_salary
+  FROM employees
+  WHERE employee_id = p_employee_id;
+
+  FOR i IN 1 .. ROUND(v_salary/1000)
+  LOOP v_asterisks := v_asterisks || '*';
+  END LOOP;
+
+  p_asterisks := v_asterisks;
+  END;
+/
+#+END_SRC
+[[file:../sql-files/procedures/asterisk_sal2.sql][sql bestand]]
+
+Voer dit uit voor personeelslid met nummer 100. \\
+Je kan dit programma als volgt oproepen (bind-variable):
+
+#+BEGIN_SRC
+SQL> VARIABLE b_asterisks VARCHAR2(50);
+SQL> EXEC asterisk_sal(100, :b_asterisks)
+#+END_SRC
+
+Dit is hoe het caller programma eruit kan zien (anoniem block):
+
+#+BEGIN_SRC plsql
+DECLARE
+  v_asterisks VARCHAR2(50);
+BEGIN
+  asterisk_sal(100, v_asterisks);
+  DBMS_OUTPUT.PUT_LINE(v_asterisks);
+END;
+/
+#+END_SRC
+[[file:../sql-files/procedures/asterisk_sal2_caller.sql][sql bestand]]
+
+Je kan de **functie** als volgt oproepen:
+#+BEGIN_SRC
+SQL> START <pathNaarBestand>/asterisk_sal_caller
+#+END_SRC
+** Opgave 7 
+Maak een procedure (landenlijst) die alle landen uit de tabel countries in een 
+lijst afdrukt en druk op het einde van de lijst ook als volgt af over hoeveel 
+landen het gaat: “We hebben connecties in ... landen.’
+
+#+BEGIN_SRC plsql
+CREATE OR REPLACE PROCEDURE landenlijst
+IS
+  v_number_of_countries integer(4) := 0;
+BEGIN
+  FOR country IN (
+    SELECT country_name
+    FROM countries
+  )
+  LOOP 
+    DBMS_OUTPUT.PUT_LINE(country.country_name);
+    v_number_of_countries := v_number_of_countries + 1;
+  END LOOP;
+  DBMS_OUTPUT.PUT_LINE(
+    'We hebben connecties in ' || 
+    v_number_of_countries ||
+    ' landen.'
+  );
+END;
+/
+#+END_SRC
+[[file:../sql-files/procedures/landenlijst.sql][sql bestand]]
+
+Deze procedure kan je uitvoeren door aan de SQL‐prompt in te tikken:
+#+BEGIN_SRC
+SQL> EXEC landenlijst 
+#+END_SRC
+
+** Opgave 8
+Maak een procedure die kan opgeroepen worden met de naam “country_dept” en die 
+een land_id mee krijgt vanuit het calling programma. Deze procedure moet alle 
+departementnamen gevestigd in dit land onder elkaar afdrukken. Indien er geen 
+enkel departement gevestigd is in dit land dan moet er worden afgedrukt: “Er 
+zijn geen departementen gevestigd in het land met id ... [land_id]”. 
+
+#+BEGIN_SRC plsql
+CREATE OR REPLACE PROCEDURE country_dept(
+  p_country_id IN countries.country_id%type
+)
+AS
+  v_max NUMBER(5);
+  v_laagste_id departments.department_id%type;
+  v_department_id departments.department_id%type;
+  v_counter NUMBER(3) :=1;
+  v_department_name departments.department_name%type;
+BEGIN
+  SELECT COUNT(location_id) INTO v_max
+  FROM departments JOIN locations
+  USING (location_id)
+  WHERE country_id = p_country_id;
+
+  IF v_max = 0 THEN
+    DBMS_OUTPUT.PUT_LINE(
+      'Er zijn geen departementen gevestigd in het land met id ' ||
+      p_country_id
+    );
+  ELSE
+  FOR department IN (
+    SELECT department_name
+    FROM departments JOIN locations
+    USING (location_id)
+    WHERE country_id = p_country_id
+  )
+  LOOP
+    DBMS_OUTPUT.PUT_LINE(
+      department.department_name 
+    );
+  END LOOP;
+  END IF;
+  END;
+/
+#+END_SRC
+[[file:../sql-files/procedures/country_dept.sql][sql bestand]]
+
+Je kan dit programma als volgt oproepen:
+#+BEGIN_SRC
+SQL> EXEC country_dept(5);
+SQL> EXEC country_dept('US');
+#+END_SRC
+
+** Opgave 9
+Maak een procedure die het volgende doet: 
+
+- Vanuit het calling programma wordt een department_id en een percentage voor 
+  loonsverhoging meegegeven 
+- van dit departement wordt bovenaan de lijst de naam van het departement (‘
+  Het gekozen departement is: ... [naam departement]) afgedrukt en daaronder 
+  alle werknemers(naam en id) die er werken met hun huidige salaris
+- deze werknemers krijgen een loonsverhoging volgens het meegegeven percentage 
+- na een blanco regel wordt het aantal salarisverhogingen afgedrukt 
+  voorafgegaan door de tekst “Aantal salarisverhogingen: ...” 
+- op een nieuwe regel wordt volgende titel afgedrukt: “SITUATIE NA WIJZIGING.” 
+  En daaronder worden alle werknemers met hun nieuwe salaris afgedrukt. 
+
+#+BEGIN_SRC plsql
+CREATE OR REPLACE PROCEDURE raise_salary(
+  p_department_id employees.department_id%type,
+  p_percent_raise NUMBER
+)
+AS
+  v_name_dep departments.department_name%type;
+  v_raise NUMBER;
+  v_raises NUMBER := 0;
+  BEGIN
+    v_raise := p_percent_raise / 100;
+    --2
+    SELECT department_name
+    INTO v_name_dep
+    FROM departments
+    WHERE department_id = p_department_id;
+    DBMS_OUTPUT.PUT_LINE(
+      'Het gekozen departement is: ' ||
+      TO_CHAR(v_name_dep) 
+    );
+    FOR employee IN (
+      SELECT last_name, employee_id, salary
+      FROM employees
+      WHERE department_id = p_department_id
+    ) 
+    LOOP
+      DBMS_OUTPUT.PUT_LINE(
+        employee.last_name || 
+        CHR(9) || 
+        employee.employee_id || 
+        CHR(9) || 
+        employee.salary
+      );
+
+     --3
+     UPDATE employees 
+     SET salary = (employee.salary * v_raise) + 
+       employee.salary 
+     WHERE employee_id = employee.employee_id;
+     v_raises := v_raises + 1;
+   END LOOP;
+   --4
+   DBMS_OUTPUT.PUT_LINE('');
+   DBMS_OUTPUT.PUT_LINE(
+     'Aantal salarisverhogingen: ' ||
+     v_raises
+   );
+
+   --5
+   DBMS_OUTPUT.PUT_LINE(
+     'SITUATIE NA WIJZIGING'
+   );
+   FOR employee IN (
+     SELECT last_name, employee_id, salary
+     FROM employees
+     WHERE department_id = p_department_id
+   )
+   LOOP
+     DBMS_OUTPUT.PUT_LINE(
+       employee.last_name ||
+       CHR(9) || 
+       employee.employee_id ||
+       CHR(9) || 
+       employee.salary
+     );
+   END LOOP;
+ END;
+/
+#+END_SRC
+
+[[file:../sql-files/procedures/raise_salary.sql][sql bestand]]
+
+Deze procedure kan je uitvoeren door aan de SQL‐prompt in te tikken:
+#+BEGIN_SRC
+SQL> EXEC raise_salary(40,1)
+#+END_SRC
+
+** Opgave 10
+Schrijf een procedure die onderstaand overzicht maakt van alle steden uit een 
+bepaald land waarvan het id (in voorbeeld US) wordt meegegeven vanuit het 
+calling program. Het totaal aantal werknemers voor dit land wordt teruggegeven 
+aan het calling program. Indien er geen afdelingen gevestigd zijn in dit land, 
+dan wordt er niks afgedrukt. Voor dit land toon je de afdelingen per locatie 
+met hun aantal werknemers zoals volgt:
+ 
+   ==> United States of America ‐ 1700 Seattle   \\
+Administration: 1 werknemers \\
+Accounting: 2 werknemers \\
+Purchasing: 6 werknemers \\
+Executive: 3 werknemers \\
+Finance: 6 werknemers \\
+==> United States of America ‐ 1400 Southlake \\ 
+IT: 5 werknemers \\
+==> United States of America \\
+ ‐ 1500 South San Francisco \\
+Shipping: 45 werknemers
+
+#+BEGIN_SRC plsql
+CREATE OR REPLACE PROCEDURE show_cities(
+  p_country_id IN locations.country_id%type,
+  p_count_location OUT NUMBER
+)
+AS
+  v_country_name countries.country_name%type;
+BEGIN
+  p_count_location :=0;
+  FOR location IN (
+    SELECT *
+    FROM locations
+    WHERE country_id = p_country_id
+    AND location_id IN (
+      SELECT location_id FROM departments
+    )
+  )
+  LOOP
+    SELECT country_name INTO v_country_name
+    FROM countries
+    WHERE country_id = location.country_id;
+    DBMS_OUTPUT.PUT_LINE(
+      '==> ' ||
+      v_country_name ||
+      ' - ' ||
+      location.location_id || 
+      ' ' || 
+      location.city
+    );
+    FOR department IN (
+      SELECT department_name, COUNT(*) NUMBER_of_departments
+      FROM departments JOIN employees USING (department_id)
+      WHERE departments.location_id = location.location_id
+      GROUP BY department_name
+    )
+    LOOP
+      DBMS_OUTPUT.PUT_LINE(
+        department.department_name || 
+        ': ' || 
+        department.NUMBER_of_departments
+      );
+      p_count_location := p_count_location + department.NUMBER_of_departments;
+    END LOOP;
+  END LOOP;
+  END;
+/
+#+END_SRC
+[[file:../sql-files/procedures/show_cities.sql][sql bestand]]
+
+Deze procedure kan je uitvoeren door aan de SQL‐prompt in te tikken:
+#+BEGIN_SRC
+SQL> EXEC show_cities(40,1)
+#+END_SRC
+
+Je kan dit programma als volgt oproepen (bind-variable):
+#+BEGIN_SRC
+SQL> VARIABLE b_NUMBER_of_departments NUMBER(5);
+SQL> show_cities('US', b_NUMBER_of_departments)
+#+END_SRC
+
+Dit is hoe het caller programma eruit kan zien (anoniem block):
+#+BEGIN_SRC plsql
+DECLARE
+  v_NUMBER_of_departments NUMBER(5);
+BEGIN
+  show_cities('US', v_NUMBER_of_departments);
+  DBMS_OUTPUT.PUT_LINE(v_NUMBER_of_departments);
+END;
+/
+#+END_SRC
+[[file:../sql-files/procedures/show_cities_caller.sql][sql bestand]]
+
+Je kan de **functie** als volgt oproepen:
+#+BEGIN_SRC
+SQL> START <pathNaarBestand>/show_cities_caller
+#+END_SRC
+
+[[file:../index.org][Home]] > [[file:plsql.org][PLSQL]] > Procedures

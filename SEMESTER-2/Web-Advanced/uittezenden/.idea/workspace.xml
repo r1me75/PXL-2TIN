@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a38a0359-36c7-4a2e-9fc4-120b4d769ef6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../js/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../js/.idea/js.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../js/.idea/libraries/begintoestand.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../js/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../js/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../js/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../php/pdo/voorbeelden_les/.idea/voorbeelden_les.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uittezenden.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../PE's/sec-adv-pe/Security-Advanced-Yellow-Lab" beforeDir="false" afterPath="$PROJECT_DIR$/../../../PE's/sec-adv-pe/Security-Advanced-Yellow-Lab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Big Data/DATA_SQL/login.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../../Big Data/DATA_SQL/login.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../js/slides/1Promises_herhaling.odp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../js/slides/2OOP_herhaling.odp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../js/slides/3webpack_ babel.odp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../js/slides/4jest.odp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../js/webpack_babel_jest_skeleton/code/voorbeeld1/public/js/bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/webpack_babel_jest_skeleton/code/voorbeeld1/public/js/bundle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../php/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../php/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../php/oef2.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../php/oef5/faculteit.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../php/oef5/ingave.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../php/oef5/verwerk.php" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/oef2/composer.json</pharConfigPath>
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/oef2/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/oef2/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/oef2/vendor/phpunit/php-token-stream" />
+      <path value="$PROJECT_DIR$/oef2/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/oef2/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/oef2/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/oef2/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/oef2/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/oef2/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/oef2/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/oef2/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/oef2/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/oef2/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/oef2/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/oef2/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/oef2/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/oef2/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/oef2/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/oef2/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/oef2/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/oef2/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/oef2/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/oef2/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/oef2/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/oef2/vendor/phpspec/prophecy" />
+      <path value="$PROJECT_DIR$/oef2/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/oef2/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/oef2/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/oef2/vendor/composer" />
+    </include_path>
+  </component>
+  <component name="ProjectId" id="2Ajv95L4DPxXXV9UrQt8uKyCbL8" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/oef1/node_modules/jest" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/oef1" />
+    </key>
+  </component>
+  <component name="RunManager" selected="PHPUnit.PriceServiceTest">
+    <configuration name="PriceServiceTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="PHP" />
+        </PhpTestInterpreterSettings>
+      </CommandLine>
+      <TestRunner class="PriceServiceTest" file="$PROJECT_DIR$/oef2/test/service/PriceServiceTest.php" scope="Class" />
+      <method v="2" />
+    </configuration>
+    <configuration name="PriceServiceTest.testCalculatePrice_emptyCart_throwsException" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="PHP" />
+        </PhpTestInterpreterSettings>
+      </CommandLine>
+      <TestRunner class="PriceServiceTest" file="$PROJECT_DIR$/oef2/test/service/PriceServiceTest.php" method="testCalculatePrice_emptyCart_throwsException" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="PriceServiceTest.testCalculatePrice_sumIs20_addsPromotionWithoutDeliveryFee" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="PHP" />
+        </PhpTestInterpreterSettings>
+      </CommandLine>
+      <TestRunner class="PriceServiceTest" file="$PROJECT_DIR$/oef2/test/service/PriceServiceTest.php" method="testCalculatePrice_sumIs20_addsPromotionWithoutDeliveryFee" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="PriceServiceTest.testCalculatePrice_sumLessThan20_addsDeliveryFee" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="PHP" />
+        </PhpTestInterpreterSettings>
+      </CommandLine>
+      <TestRunner class="PriceServiceTest" file="$PROJECT_DIR$/oef2/test/service/PriceServiceTest.php" method="testCalculatePrice_sumLessThan20_addsDeliveryFee" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <configuration name="PriceServiceTest.testCalculatePrice_sumMoreThan20_addsPromotion" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="PHP" />
+        </PhpTestInterpreterSettings>
+      </CommandLine>
+      <TestRunner class="PriceServiceTest" file="$PROJECT_DIR$/oef2/test/service/PriceServiceTest.php" method="testCalculatePrice_sumMoreThan20_addsPromotion" scope="Method" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="PHPUnit.PriceServiceTest" />
+        <item itemvalue="PHPUnit.PriceServiceTest.testCalculatePrice_sumMoreThan20_addsPromotion" />
+        <item itemvalue="PHPUnit.PriceServiceTest.testCalculatePrice_sumLessThan20_addsDeliveryFee" />
+        <item itemvalue="PHPUnit.PriceServiceTest.testCalculatePrice_emptyCart_throwsException" />
+        <item itemvalue="PHPUnit.PriceServiceTest.testCalculatePrice_sumIs20_addsPromotionWithoutDeliveryFee" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a38a0359-36c7-4a2e-9fc4-120b4d769ef6" name="Changes" comment="" />
+      <created>1655535654888</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1655535654888</updated>
+      <workItem from="1655535656094" duration="7112000" />
+      <workItem from="1655579462797" duration="677000" />
+      <workItem from="1655829558197" duration="9000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

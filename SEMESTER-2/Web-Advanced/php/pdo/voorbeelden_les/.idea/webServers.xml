@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="bda5789e-160d-489e-ac98-8e3dd7f5ebdc" name="vagrant">
+        <fileTransfer accessType="SFTP" host="192.168.33.22" port="22" sshConfigId="5a875fcd-f02c-4ae9-a150-03cad1e22fca" sshConfig="vagrant@192.168.33.22:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

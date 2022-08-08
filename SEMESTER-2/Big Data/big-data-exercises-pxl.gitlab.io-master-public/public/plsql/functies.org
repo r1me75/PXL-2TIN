@@ -1,0 +1,292 @@
+#+TITLE: Oefeningen PL/SQL - Hoofdstuk 2: Functies
+#+AUTHOR: Robin Wils
+#+INCLUDE: "../org-options.org"
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../solarized-dark.min.css"/>
+-----
+[[file:../index.org][Home]] > [[file:plsql.org][PLSQL]] > Functies \\
+[[https://pxl-college-projects.gitlab.io/big-data-exercises-pxl.gitlab.io/plsql/functies.org][View org source]]
+
+#+TOC: headlines
+
+** Hoe kan ik functies uitvoeren?
+Maak een .sql bestand met je functie in en slaag dit bestand op.
+Het kan handig zijn als je het bestand waarmee je de PLSQL omgeving opent in 
+dezelfde folder hebt staat.
+
+Typ "START <functienaam>" in je PLSQL omgeving om de functie aan te maken.
+Je kan in te plaats van de functienaam het path naar het bestand ingeven.
+Dit is handig indien je PLSQL omgeving vanuit een andere folder word gestart.
+
+Typ "SELECT <functienaam> FROM dual;" in je PLSQL omgeving om deze functie 
+uit te voeren.
+
+** Opgave 1 
+Schrijf een functie ‘dagen_einde_maand’ die berekent hoeveel dagen er liggen 
+tussen nu (=systeemdatum) en het einde van deze maand. 
+
+#+BEGIN_SRC plsql
+CREATE OR REPLACE FUNCTION dagen_einde_maand
+RETURN NUMBER
+AS
+ 	v_number NUMBER;
+BEGIN
+  RETURN LAST_DAY(sysdate) - sysdate;
+END;
+/
+#+END_SRC
+[[file:../sql-files/functies/dagen_einde_maand.sql][sql bestand]]
+
+** Opgave 2 
+Schrijf een functie ‘aantal_dienstjaren’ om na te gaan hoe lang een specifieke 
+werknemer reeds in dienst is. Als parameter wordt datum van indiensttreding 
+van de werknemer meegegeven. De functie geeft het aantal volledige dienstjaren 
+terug. 
+
+#+BEGIN_SRC plsql
+CREATE OR REPLACE FUNCTION aantal_dienstjaren
+(p_hire_date employees.hire_date%type)
+RETURN NUMBER
+AS
+BEGIN
+  RETURN TRUNC(months_between(sysdate, p_hire_date)/12);
+END;
+/
+#+END_SRC
+[[file:../sql-files/functies/aantal_dienstjaren.sql][sql bestand]]
+
+** Opgave 3 
+a) Schrijf een functie ‘netto’ om het netto salaris van een 
+werknemer te berekenen. Als parameter wordt het bruto salaris 
+meegegeven. De belastingen bedragen 40% van het bruto salaris. 
+Het netto salaris moet teruggegeven worden als vb 9,456.55 euro. 
+
+#+BEGIN_SRC plsql
+CREATE OR REPLACE FUNCTION netto
+(p_salary employees.salary%type)
+RETURN VARCHAR2
+AS
+  v_netto employees.salary%type;
+BEGIN
+  v_netto := p_salary * 0.6;
+  RETURN to_char(v_netto, '9,999.00') || ' euro';
+END;
+/
+#+END_SRC
+[[file:../sql-files/functies/netto-3a.sql][sql bestand]]
+
+b) Herschrijf de functie ‘netto’ zodat de belastingen in 
+schijven berekend worden. Op de eerste 10 000 euro betaal je 
+40% belastingen, op de volgende 6000 euro betaal je 50% 
+belastingen en op de hoogste inkomensschijf betaal je 60% 
+belastingen. 
+
+#+BEGIN_SRC plsql
+CREATE OR REPLACE FUNCTION netto
+(p_salary employees.salary%type)
+RETURN VARCHAR2
+AS
+  v_netto employees.salary%type;
+BEGIN
+  IF p_salary <= 10000 THEN
+    v_netto := p_salary * 0.6;
+  ELSIF p_salary <= 16000 THEN
+    v_netto := 10000 * 0.6 + (p_salary-10000) * 0.5;
+  ELSE
+    v_netto := 10000 * 0.6 + 6000 * 0.5 + (p_salary-16000) * 0.4;
+  END IF;
+  RETURN to_char(v_netto, '9,999.00') || ' euro';
+END;
+/
+#+END_SRC
+[[file:../sql-files/functies/netto-3b.sql][sql bestand]]
+
+** Opgave 4 
+a) Schrijf een functie ‘schrikkeljaar’ om na te gaan of 
+het huidige jaar een schrikkeljaar is of niet. De functie geeft terug 
+‘het jaar xxx is een schrikkeljaar’ of ‘het jaar xxx is geen schrikkeljaar’.
+
+#+BEGIN_SRC plsql
+CREATE OR REPLACE FUNCTION schrikkeljaar
+RETURN VARCHAR2
+AS
+  v_year VARCHAR2(4):= TO_CHAR(SYSDATE, 'YYYY');
+BEGIN
+  IF MOD(v_year, 4) = 0 THEN
+    RETURN 'Het jaar ' || v_year || ' is een schrikkeljaar.';
+	ELSE
+    RETURN 'Het jaar ' || v_year || ' is geen schrikkeljaar.';
+	END IF;
+END;
+/
+#+END_SRC
+[[file:../sql-files/functies/schrikkeljaar-4a.sql][sql bestand]]
+
+b) Herschrijf de functie ‘schrikkeljaar’ zodat voor elk 
+jaar kan bepaald worden of het een schrikkeljaar is of niet. 
+Gebruik een parameter.
+
+#+BEGIN_SRC plsql
+CREATE OR REPLACE FUNCTION schrikkeljaar
+(p_year VARCHAR2)
+RETURN VARCHAR2
+AS
+BEGIN
+  IF MOD(p_year, 4) = 0 THEN
+    RETURN 'Het jaar ' || p_year || ' is een schrikkeljaar.';
+	ELSE
+    RETURN 'Het jaar ' || p_year || ' is geen schrikkeljaar.';
+	END IF;
+END;
+/
+#+END_SRC
+[[file:../sql-files/functies/schrikkeljaar-4b.sql][sql bestand]]
+
+** Opgave 5 
+Elke eerste maandag van de maand gaat een vergadering door. Schrijf een 
+functie 'volgende_vergadering' die de datum toont van de eerstvolgende 
+vergadering. 
+
+Let op: 1 januari en 1 mei zijn wettelijke feestdagen. Als de eerste maandag 
+van de maand op 1 van deze data valt, dan wordt er vergaderd op dinsdag. 
+
+#+BEGIN_SRC plsql
+CREATE OR REPLACE FUNCTION volgende_vergadering
+RETURN DATE
+AS
+  v_meeting DATE;
+BEGIN
+  v_meeting := LAST_DAY(sysdate)+1;
+
+  IF to_char(v_meeting,'fmday')!='monday'
+  THEN
+    v_meeting := NEXT_DAY(v_meeting,'monday');
+  END IF;  
+	IF to_char(v_meeting,'dd-mm') = '01-01'
+  OR to_char(v_meeting,'dd-mm') = '01-05'
+  THEN
+    v_meeting := v_meeting + 1;
+  END IF;
+ 	RETURN v_meeting;
+END;
+/
+#+END_SRC
+[[file:../sql-files/functies/volgende_vergadering.sql][sql bestand]]
+
+** Opgave 6 
+Stel dat er geen sequence is om een id voor nieuwe employees toe te kennen. 
+Maak een functie ‘next_employee_id’ die het hoogste employee_id ophaalt, 
+dit ophoogt met 1 en die waarde terugstuurt.
+
+#+BEGIN_SRC plsql
+CREATE OR REPLACE FUNCTION next_employee_id
+RETURN employees.employee_id%type
+AS
+    v_id employees.employee_id%type;
+BEGIN
+    SELECT max(employee_id) INTO v_id
+    FROM employees;
+    RETURN v_id + 1;
+END;
+/
+#+END_SRC
+[[file:sql-files/functies/next_employee_id.sql][sql bestand]]
+
+** Opgave 7 
+Maak een functie voor de berekening van het (bruto)jaarloon van een werknemer. 
+Houd hierbij rekening met het commissiepercentage. Als parameter komt het 
+employee_id van de werknemer binnen.
+
+#+BEGIN_SRC plsql
+CREATE OR REPLACE FUNCTION get_jaarloon
+(p_employee_id employees.employee_id%type)
+RETURN employees.salary%type
+AS
+  v_bruto employees.salary%type;
+BEGIN
+  SELECT (salary + nvl(salary*commission_pct,0))*12 
+  INTO v_bruto
+  FROM employees
+  WHERE employee_id = p_employee_id;
+  RETURN v_bruto;
+END;
+/
+#+END_SRC
+[[file:../sql-files/functies/get_jaarloon.sql][sql bestand]]
+
+** Opgave 8 
+Maak een functie die de naam en voornaam teruggeeft van de persoon die hoofd is 
+van de afdeling waar de meeste werknemers werken. 
+
+#+BEGIN_SRC plsql
+CREATE OR REPLACE FUNCTION hoofd_meeste_werknemers
+RETURN VARCHAR2
+AS
+  v_department_id employees.department_id%type;
+  v_aantal NUMBER;
+  v_manager_id employees.manager_id%type;
+  v_first_name employees.first_name%type;
+  v_last_name employees.last_name%type;
+BEGIN
+  SELECT department_id, count(employee_id)
+  INTO v_department_id, v_aantal
+  FROM employees
+  GROUP BY department_id
+  HAVING count(employee_id) = (SELECT max(count(employee_id))
+  FROM employees
+  GROUP BY department_id);
+  SELECT manager_id
+  INTO v_manager_id
+  FROM departments
+  WHERE department_id = v_department_id;
+  SELECT first_name , last_name
+  INTO v_first_name, v_last_name
+  FROM employees
+  WHERE employee_id = v_manager_id;
+  RETURN v_first_name || ' ' || v_last_name;
+END;
+/
+#+END_SRC
+[[file:../sql-files/functies/hoofd_meeste_werknemers.sql][sql bestand]]
+
+** Opgave 9
+Schrijf een functie ‘get_jubileumdatum’ om te berekenen wanneer een bepaalde 
+werknemer 25 jaar in dienst is, en dus gevierd gaat worden.Het feest vindt 
+plaats op de eerste vrijdag volgend op de dag waarop hij 25 jaar in dienst is, 
+tenzij dat net een vrijdag is, dan is het onmiddellijk feest. 
+
+Let op:  als deze datum al voorbij is wordt als resultaat van de functie 
+teruggekeerd ‘werd reedsgevierd’. Invoerparameters: familienaam en voornaam 
+van de werknemer waarvoor de jubileumsdatum opgezocht wordt. 
+
+#+BEGIN_SRC plsql
+CREATE OR REPLACE FUNCTION get_jubileumdatum
+(p_last_name employees.last_name%type, p_first_name employees.first_name%type)
+RETURN VARCHAR2
+AS
+  v_hire_date DATE;
+  v_jubileum DATE;
+BEGIN
+  SELECT hire_date
+  INTO v_hire_date
+  FROM employees
+  WHERE last_name = p_last_name
+  AND first_name = p_first_name;
+  
+  v_jubileum := add_months(v_hire_date, 25*12);
+  IF to_char(v_jubileum, 'd') != 6 
+  THEN
+-- Eerste dag van de week is zondag in plsql. Dit controleert of het vrijdag is 
+-- en als dat niet het geval is neemt het de volgende vrijdag
+    v_jubileum := next_day(v_jubileum, 'fri');
+  END IF;
+  IF v_jubileum < sysdate
+  THEN
+    RETURN 'Al gevierd';
+  ELSE 
+    RETURN to_char(v_jubileum);
+  END IF;
+END;
+/
+#+END_SRC
+[[file:../sql-files/functies/get_jubileumdatum.sql][sql bestand]] \\
+[[file:../index.org][Home]] > [[file:plsql.org][PLSQL]] > Functies

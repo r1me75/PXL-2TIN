@@ -1,0 +1,1024 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-08-14 Wed 16:39 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Oefeningen PL/SQL - Hoofdstuk 3: Procedures</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Robin Wils" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../solarized-dark.min.css"/>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Oefeningen PL/SQL - Hoofdstuk 3: Procedures</h1>
+<hr />
+<p>
+<a href="../index.html">Home</a> &gt; <a href="plsql.html">PLSQL</a> &gt; Procedures <br />
+<a href="https://pxl-college-projects.gitlab.io/big-data-exercises-pxl.gitlab.io/plsql/procedures.org">View org source</a>
+</p>
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org8ca9c85">Hoe voer ik procedures uit?</a></li>
+<li><a href="#org574ca37">Opgave 1</a></li>
+<li><a href="#org10f6705">Opgave 2</a></li>
+<li><a href="#org60b0c9b">Opgave 3</a></li>
+<li><a href="#orgc6c7b9c">Opgave 4</a></li>
+<li><a href="#org82be2fc">Opgave 5</a></li>
+<li><a href="#org243a50d">Opgave 6</a></li>
+<li><a href="#orgf0b594e">Opgave 7</a></li>
+<li><a href="#org6e6d045">Opgave 8</a></li>
+<li><a href="#org39f70d3">Opgave 9</a></li>
+<li><a href="#org8689495">Opgave 10</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8ca9c85" class="outline-2">
+<h2 id="org8ca9c85">Hoe voer ik procedures uit?</h2>
+<div class="outline-text-2" id="text-org8ca9c85">
+<p>
+Een procedure kan je aanmaken door op de SQL‐prompt in te tikken:
+</p>
+<pre class="example">
+SQL&gt; START &lt;filepath&gt;/procedure_naam
+</pre>
+
+<p>
+Je kan procedure output toestaan door het volgende op de SQL‐prompt 
+in te tikken (Dit moet je opnieuw doen als je opnieuw inlogt):
+</p>
+<pre class="example">
+SQL&gt; SET serveroutput on
+</pre>
+
+<p>
+Een procedure kan je uitvoeren door op de SQL‐prompt in te tikken:
+</p>
+<pre class="example">
+SQL&gt; EXEC procedure_naam
+</pre>
+
+<p>
+Een procedure kan je verwijderen door op de SQL‐prompt in te tikken:
+</p>
+<pre class="example">
+SQL&gt; DROP PROCEDURE procedure_naam;
+</pre>
+</div>
+</div>
+<div id="outline-container-org574ca37" class="outline-2">
+<h2 id="org574ca37">Opgave 1</h2>
+<div class="outline-text-2" id="text-org574ca37">
+<p>
+Schrijf een procedure ‘toon_laatste_emp’ die in de medewerkerstabel zoekt naar 
+de laatst aangeworven medewerker. Toon het nummer, de naam en de 
+aanwervingsdatum van deze medewerker.   
+</p>
+
+<p>
+Alvorens de procedure uit te voeren, geef je het volgende in: <br />
+</p>
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">UPDATE</span> employees
+<span style="color: #DD6F48;">SET</span> hire_date = <span style="color: #528B8B;">'20&#8208;apr&#8208;00'</span>
+<span style="color: #DD6F48;">WHERE</span> employee_id =173;
+</pre>
+</div>
+
+<p>
+Deze procedure kan je uitvoeren door op de SQL‐prompt in te tikken:
+</p>
+<pre class="example">
+SQL&gt; EXEC toon_laatste_emp
+</pre>
+
+<p>
+<i>Er staat een trigger op dat update commando.</i>
+<i>De naam van deze trigger wordt getoont in de error-message wanneer je het
+commando uitvoert. Je kan deze trigger droppen via het volgende commando.</i>
+</p>
+
+<pre class="example">
+SQL&gt; DROP TRIGGER secure_employees;
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">PROCEDURE</span> <span style="color: #A89984;">toon_laatste_emp</span>
+<span style="color: #DD6F48;">IS</span>
+  v_emp_id employees.employee_id%<span style="color: #DD6F48;">type</span>;
+  v_emp_name employees.last_name%<span style="color: #DD6F48;">type</span>;
+  v_emp_hire_date employees.hire_date%<span style="color: #DD6F48;">type</span>;
+<span style="color: #DD6F48;">BEGIN</span>
+  <span style="color: #DD6F48;">SELECT</span> employee_id, last_name, hire_date
+  <span style="color: #DD6F48;">INTO</span> v_emp_id, v_emp_name, v_emp_hire_date
+  <span style="color: #DD6F48;">FROM</span> (
+    <span style="color: #DD6F48;">SELECT</span> employee_id, first_name, last_name, hire_date
+    <span style="color: #DD6F48;">FROM</span> employees
+    <span style="color: #DD6F48;">ORDER</span> <span style="color: #DD6F48;">BY</span> hire_date 
+    <span style="color: #DD6F48;">DESC</span>
+  ) 
+  <span style="color: #DD6F48;">WHERE</span> ROWNUM = 1;
+
+  DBMS_OUTPUT.PUT_LINE(
+    v_emp_id || <span style="color: #528B8B;">':'</span> || v_emp_name || <span style="color: #528B8B;">':'</span> || v_emp_hire_date
+  );
+<span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/procedures/toon_laatste_emp.sql">sql bestand</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org10f6705" class="outline-2">
+<h2 id="org10f6705">Opgave 2</h2>
+<div class="outline-text-2" id="text-org10f6705">
+<p>
+Schrijf een procedure (grootste_dept) die de departementsnaam van het 
+departement met de meeste employees opzoekt en van dit departement de naam 
+afdrukt samen met de naam, voornaam en het salaris van de employee uit dit 
+departement met het hoogste salaris.  
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">PROCEDURE</span> <span style="color: #A89984;">grootste_dept</span>
+<span style="color: #DD6F48;">IS</span>
+  v_dept_id departments.department_id%<span style="color: #DD6F48;">type</span>;
+  v_dept_name departments.department_name%<span style="color: #DD6F48;">type</span>;
+  v_name employees.last_name%<span style="color: #DD6F48;">type</span>;
+  v_firstname employees.first_name%<span style="color: #DD6F48;">type</span>;
+  v_salary employees.salary%<span style="color: #DD6F48;">type</span>;
+<span style="color: #DD6F48;">BEGIN</span>
+  <span style="color: #DD6F48;">SELECT</span> department_name, department_id
+  <span style="color: #DD6F48;">INTO</span> v_dept_name, v_dept_id
+  <span style="color: #DD6F48;">FROM</span> departments 
+  <span style="color: #DD6F48;">JOIN</span> employees
+  <span style="color: #DD6F48;">USING</span>(department_id)
+  <span style="color: #DD6F48;">GROUP</span> <span style="color: #DD6F48;">BY</span> department_name, department_id
+  <span style="color: #DD6F48;">HAVING</span> <span style="color: #FE8019;">COUNT</span>(employees.employee_id) = (
+    <span style="color: #DD6F48;">SELECT</span> <span style="color: #FE8019;">MAX</span>(<span style="color: #FE8019;">COUNT</span>(*))
+    <span style="color: #DD6F48;">FROM</span> employees
+    <span style="color: #DD6F48;">GROUP</span> <span style="color: #DD6F48;">BY</span> department_id
+  );
+  <span style="color: #DD6F48;">SELECT</span> last_name, first_name, salary
+  <span style="color: #DD6F48;">INTO</span> v_name, v_firstname, v_salary
+  <span style="color: #DD6F48;">FROM</span> employees 
+  <span style="color: #DD6F48;">JOIN</span> departments 
+  <span style="color: #DD6F48;">USING</span> (department_id)
+  <span style="color: #DD6F48;">WHERE</span> department_name = v_dept_name
+  <span style="color: #DD6F48;">AND</span> employees.salary = (
+    <span style="color: #DD6F48;">SELECT</span> <span style="color: #FE8019;">MAX</span>(salary)
+    <span style="color: #DD6F48;">FROM</span> employees
+    <span style="color: #DD6F48;">WHERE</span> department_id = v_dept_id
+  );
+  DBMS_OUTPUT.PUT_LINE(
+    <span style="color: #528B8B;">'Department: '</span> || 
+    v_dept_name ||
+    chr(13) ||
+    chr(10) ||
+    <span style="color: #528B8B;">'Highest salary: '</span> ||
+    v_name ||
+    <span style="color: #528B8B;">' '</span> || 
+    v_salary
+  );
+<span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/procedures/grootste_dept.sql">sql bestand</a>
+</p>
+
+<p>
+Deze procedure kan je uitvoeren door op de SQL‐prompt in te tikken:
+</p>
+<pre class="example">
+SQL&gt; EXEC grootste_dept 
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org60b0c9b" class="outline-2">
+<h2 id="org60b0c9b">Opgave 3</h2>
+<div class="outline-text-2" id="text-org60b0c9b">
+<p>
+Schrijf een procedure (minimumlonen) die ervoor zorgt dat als in een 
+bepaald land nieuwe wetgeving van kracht gaat ivm minimumlonen, 
+de eventueel nodige salarisaanpassingen van de employees gemakkelijk in 
+de databank doorgevoerd kunnen worden.
+</p>
+
+<p>
+Invoerparameters: de landnaam en het nieuwe minimumloon dat daar vanaf 
+nu geldig is. <br />
+Bewaar deze procedure als proc_minimumlonen.sql om in opdracht 4 te kunnen 
+wijzigen.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">PROCEDURE</span> <span style="color: #A89984;">minimumlonen</span>(
+  p_country_name <span style="color: #DD6F48;">IN</span> countries.country_name%<span style="color: #DD6F48;">type</span>, 
+  p_min_salary <span style="color: #DD6F48;">IN</span> employees.salary%<span style="color: #DD6F48;">type</span>
+)
+<span style="color: #DD6F48;">IS</span>
+<span style="color: #DD6F48;">BEGIN</span>
+  <span style="color: #DD6F48;">UPDATE</span> employees
+  <span style="color: #DD6F48;">SET</span> salary = p_min_salary
+  <span style="color: #DD6F48;">WHERE</span> department_id 
+  <span style="color: #DD6F48;">IN</span> (
+    <span style="color: #DD6F48;">SELECT</span> department_id
+    <span style="color: #DD6F48;">FROM</span> departments
+    <span style="color: #DD6F48;">WHERE</span> location_id 
+    <span style="color: #DD6F48;">IN</span> (
+      <span style="color: #DD6F48;">SELECT</span> location_id
+      <span style="color: #DD6F48;">FROM</span> locations
+      <span style="color: #DD6F48;">WHERE</span> country_id
+      <span style="color: #DD6F48;">IN</span> (
+        <span style="color: #DD6F48;">SELECT</span> country_id
+        <span style="color: #DD6F48;">FROM</span> countries
+        <span style="color: #DD6F48;">WHERE</span> country_name = p_country_name
+      )
+    )
+  )
+  <span style="color: #DD6F48;">AND</span> salary &lt; p_min_salary;
+<span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/procedures/proc_minimumlonen.sql">sql bestand</a>
+</p>
+
+<p>
+Deze procedure kan je uitvoeren door aan de SQL‐prompt in te tikken:
+</p>
+<pre class="example">
+SQL&gt; EXEC minimumlonen('Canada',6250) 
+</pre>
+
+<p>
+Controleer vooraf even of er een employee is uit Canada die minder 
+verdient dan 6250. En check dan achteraf of er een aanpassing heeft 
+plaatsgevonden. 
+</p>
+
+<p>
+Je kan dit checken via het volgende commando. <br />
+(Rechtermuisnop is plakken, yank niet na het voor de GNU Emacs gebruikers.)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">SELECT</span> salary
+<span style="color: #DD6F48;">FROM</span> employees 
+<span style="color: #DD6F48;">JOIN</span> departments
+<span style="color: #DD6F48;">USING</span> (department_id)
+<span style="color: #DD6F48;">JOIN</span> locations
+<span style="color: #DD6F48;">USING</span> (location_id)
+<span style="color: #DD6F48;">JOIN</span> countries
+<span style="color: #DD6F48;">USING</span> (country_id)
+<span style="color: #DD6F48;">WHERE</span> country_id = <span style="color: #528B8B;">'CA'</span>;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc6c7b9c" class="outline-2">
+<h2 id="orgc6c7b9c">Opgave 4</h2>
+<div class="outline-text-2" id="text-orgc6c7b9c">
+<p>
+Wijzig de procedure uit opdracht 3 zodat het calling programma 
+een melding terugkrijgt van het aantal gewijzigde records/rijen en dit 
+afdrukt: 
+</p>
+
+<ul class="org-ul">
+<li>via een anoniem block</li>
+<li>via een bind‐variable</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">PROCEDURE</span> <span style="color: #A89984;">minimumlonen</span>(
+  p_country_name <span style="color: #DD6F48;">IN</span> countries.country_name%<span style="color: #DD6F48;">type</span>, 
+  p_min_salary <span style="color: #DD6F48;">IN</span> employees.salary%<span style="color: #DD6F48;">type</span>,
+  p_rowcount <span style="color: #DD6F48;">OUT</span> <span style="color: #DD6F48;">NUMBER</span>
+)
+<span style="color: #DD6F48;">IS</span>
+<span style="color: #DD6F48;">BEGIN</span>
+  <span style="color: #DD6F48;">UPDATE</span> employees
+  <span style="color: #DD6F48;">SET</span> salary = p_min_salary
+  <span style="color: #DD6F48;">WHERE</span> department_id 
+  <span style="color: #DD6F48;">IN</span> (
+    <span style="color: #DD6F48;">SELECT</span> department_id
+    <span style="color: #DD6F48;">FROM</span> departments
+    <span style="color: #DD6F48;">WHERE</span> location_id 
+    <span style="color: #DD6F48;">IN</span> (
+      <span style="color: #DD6F48;">SELECT</span> location_id
+      <span style="color: #DD6F48;">FROM</span> locations
+      <span style="color: #DD6F48;">WHERE</span> country_id
+      <span style="color: #DD6F48;">IN</span> (
+        <span style="color: #DD6F48;">SELECT</span> country_id
+        <span style="color: #DD6F48;">FROM</span> countries
+        <span style="color: #DD6F48;">WHERE</span> country_name = p_country_name
+      )
+    )
+  )
+  <span style="color: #DD6F48;">AND</span> salary &lt; p_min_salary;
+  p_rowcount := <span style="color: #DD6F48;">SQL</span>%rowcount;
+<span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/procedures/minimumlonen.sql">sql bestand</a>
+</p>
+
+<p>
+Je kan dit programma als volgt oproepen (bind-variable):
+</p>
+
+<pre class="example">
+SQL&gt; VARIABLE b_v_rowcount NUMBER;
+SQL&gt; EXEC minimumlonen('Canada',6250,:b_v_rowcount)
+</pre>
+
+<p>
+Dit is hoe het caller programma eruit kan zien (anoniem block):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">DECLARE</span>
+  v_rowcount <span style="color: #DD6F48;">NUMBER</span>;
+<span style="color: #DD6F48;">BEGIN</span>
+  minimumlonen(<span style="color: #528B8B;">'Canada'</span>, 2000, v_rowcount);
+  DBMS_OUTPUT.PUT_LINE(v_rowcount);
+<span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/procedures/minimumlonen_caller.sql">sql bestand</a>
+</p>
+
+<p>
+Je kan de <b><b>functie</b></b> als volgt oproepen:
+</p>
+<pre class="example">
+SQL&gt; START &lt;pathNaarBestand&gt;/minimumlonen_caller
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org82be2fc" class="outline-2">
+<h2 id="org82be2fc">Opgave 5</h2>
+<div class="outline-text-2" id="text-org82be2fc">
+<p>
+Maak een procedure (asterisk_sal) die van een opgegeven werknemer 
+(employee_id) het salaris in sterretjes afdrukt. Elke ster vertegenwoordigt 
+1000 euro.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">PROCEDURE</span> <span style="color: #A89984;">asterisk_sal</span>(
+   p_employee_id <span style="color: #DD6F48;">IN</span> employees.employee_id%<span style="color: #DD6F48;">type</span>
+)
+<span style="color: #DD6F48;">AS</span>
+  v_salary employees.salary%<span style="color: #DD6F48;">type</span>;
+  v_asterisks VARCHAR2(50);
+<span style="color: #DD6F48;">BEGIN</span>
+  <span style="color: #DD6F48;">SELECT</span> salary 
+  <span style="color: #DD6F48;">INTO</span> v_salary
+  <span style="color: #DD6F48;">FROM</span> employees
+  <span style="color: #DD6F48;">WHERE</span> employee_id = p_employee_id;
+
+  <span style="color: #DD6F48;">FOR</span> i <span style="color: #DD6F48;">IN</span> 1 .. ROUND(v_salary/1000)
+  LOOP v_asterisks := v_asterisks || <span style="color: #528B8B;">'*'</span>;
+  <span style="color: #DD6F48;">END</span> LOOP;
+  DBMS_OUTPUT.PUT_LINE(
+    v_asterisks
+  );
+
+  <span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/procedures/asterisk_sal.sql">sql bestand</a>
+</p>
+
+<p>
+Deze procedure kan je uitvoeren door aan de SQL‐prompt in te tikken: 
+</p>
+<pre class="example">
+SQL&gt; EXEC asterisk_sal(100) 
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org243a50d" class="outline-2">
+<h2 id="org243a50d">Opgave 6</h2>
+<div class="outline-text-2" id="text-org243a50d">
+<p>
+Wijzig de procedure uit opdracht 5 zodat het calling program het aantal 
+sterretjes terugkrijgt en dit afdrukt: 
+</p>
+
+<ul class="org-ul">
+<li>via een anoniem block</li>
+<li>via een bind‐variable</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">PROCEDURE</span> <span style="color: #A89984;">asterisk_sal</span>(  
+  p_employee_id <span style="color: #DD6F48;">IN</span> employees.employee_id%<span style="color: #DD6F48;">type</span>,
+  p_asterisks <span style="color: #DD6F48;">OUT</span> VARCHAR2
+)
+<span style="color: #DD6F48;">AS</span>
+  v_salary employees.salary%<span style="color: #DD6F48;">type</span>;
+  v_asterisks VARCHAR2(50);
+<span style="color: #DD6F48;">BEGIN</span>
+  <span style="color: #DD6F48;">SELECT</span> salary 
+  <span style="color: #DD6F48;">INTO</span> v_salary
+  <span style="color: #DD6F48;">FROM</span> employees
+  <span style="color: #DD6F48;">WHERE</span> employee_id = p_employee_id;
+
+  <span style="color: #DD6F48;">FOR</span> i <span style="color: #DD6F48;">IN</span> 1 .. ROUND(v_salary/1000)
+  LOOP v_asterisks := v_asterisks || <span style="color: #528B8B;">'*'</span>;
+  <span style="color: #DD6F48;">END</span> LOOP;
+
+  p_asterisks := v_asterisks;
+  <span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/procedures/asterisk_sal2.sql">sql bestand</a>
+</p>
+
+<p>
+Voer dit uit voor personeelslid met nummer 100. <br />
+Je kan dit programma als volgt oproepen (bind-variable):
+</p>
+
+<pre class="example">
+SQL&gt; VARIABLE b_asterisks VARCHAR2(50);
+SQL&gt; EXEC asterisk_sal(100, :b_asterisks)
+</pre>
+
+<p>
+Dit is hoe het caller programma eruit kan zien (anoniem block):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">DECLARE</span>
+  v_asterisks VARCHAR2(50);
+<span style="color: #DD6F48;">BEGIN</span>
+  asterisk_sal(100, v_asterisks);
+  DBMS_OUTPUT.PUT_LINE(v_asterisks);
+<span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/procedures/asterisk_sal2_caller.sql">sql bestand</a>
+</p>
+
+<p>
+Je kan de <b><b>functie</b></b> als volgt oproepen:
+</p>
+<pre class="example">
+SQL&gt; START &lt;pathNaarBestand&gt;/asterisk_sal_caller
+</pre>
+</div>
+</div>
+<div id="outline-container-orgf0b594e" class="outline-2">
+<h2 id="orgf0b594e">Opgave 7</h2>
+<div class="outline-text-2" id="text-orgf0b594e">
+<p>
+Maak een procedure (landenlijst) die alle landen uit de tabel countries in een 
+lijst afdrukt en druk op het einde van de lijst ook als volgt af over hoeveel 
+landen het gaat: “We hebben connecties in &#x2026; landen.’
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">PROCEDURE</span> <span style="color: #A89984;">landenlijst</span>
+<span style="color: #DD6F48;">IS</span>
+  v_number_of_countries <span style="color: #66999D;">integer</span>(4) := 0;
+<span style="color: #DD6F48;">BEGIN</span>
+  <span style="color: #DD6F48;">FOR</span> country <span style="color: #DD6F48;">IN</span> (
+    <span style="color: #DD6F48;">SELECT</span> country_name
+    <span style="color: #DD6F48;">FROM</span> countries
+  )
+  LOOP 
+    DBMS_OUTPUT.PUT_LINE(country.country_name);
+    v_number_of_countries := v_number_of_countries + 1;
+  <span style="color: #DD6F48;">END</span> LOOP;
+  DBMS_OUTPUT.PUT_LINE(
+    <span style="color: #528B8B;">'We hebben connecties in '</span> || 
+    v_number_of_countries ||
+    <span style="color: #528B8B;">' landen.'</span>
+  );
+<span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/procedures/landenlijst.sql">sql bestand</a>
+</p>
+
+<p>
+Deze procedure kan je uitvoeren door aan de SQL‐prompt in te tikken:
+</p>
+<pre class="example">
+SQL&gt; EXEC landenlijst 
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org6e6d045" class="outline-2">
+<h2 id="org6e6d045">Opgave 8</h2>
+<div class="outline-text-2" id="text-org6e6d045">
+<p>
+Maak een procedure die kan opgeroepen worden met de naam “country_dept” en die 
+een land_id mee krijgt vanuit het calling programma. Deze procedure moet alle 
+departementnamen gevestigd in dit land onder elkaar afdrukken. Indien er geen 
+enkel departement gevestigd is in dit land dan moet er worden afgedrukt: “Er 
+zijn geen departementen gevestigd in het land met id &#x2026; [land_id]”. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">PROCEDURE</span> <span style="color: #A89984;">country_dept</span>(
+  p_country_id <span style="color: #DD6F48;">IN</span> countries.country_id%<span style="color: #DD6F48;">type</span>
+)
+<span style="color: #DD6F48;">AS</span>
+  v_max <span style="color: #DD6F48;">NUMBER</span>(5);
+  v_laagste_id departments.department_id%<span style="color: #DD6F48;">type</span>;
+  v_department_id departments.department_id%<span style="color: #DD6F48;">type</span>;
+  v_counter <span style="color: #DD6F48;">NUMBER</span>(3) :=1;
+  v_department_name departments.department_name%<span style="color: #DD6F48;">type</span>;
+<span style="color: #DD6F48;">BEGIN</span>
+  <span style="color: #DD6F48;">SELECT</span> <span style="color: #FE8019;">COUNT</span>(location_id) <span style="color: #DD6F48;">INTO</span> v_max
+  <span style="color: #DD6F48;">FROM</span> departments <span style="color: #DD6F48;">JOIN</span> locations
+  <span style="color: #DD6F48;">USING</span> (location_id)
+  <span style="color: #DD6F48;">WHERE</span> country_id = p_country_id;
+
+  IF v_max = 0 <span style="color: #DD6F48;">THEN</span>
+    DBMS_OUTPUT.PUT_LINE(
+      <span style="color: #528B8B;">'Er zijn geen departementen gevestigd in het land met id '</span> ||
+      p_country_id
+    );
+  <span style="color: #DD6F48;">ELSE</span>
+  <span style="color: #DD6F48;">FOR</span> department <span style="color: #DD6F48;">IN</span> (
+    <span style="color: #DD6F48;">SELECT</span> department_name
+    <span style="color: #DD6F48;">FROM</span> departments <span style="color: #DD6F48;">JOIN</span> locations
+    <span style="color: #DD6F48;">USING</span> (location_id)
+    <span style="color: #DD6F48;">WHERE</span> country_id = p_country_id
+  )
+  LOOP
+    DBMS_OUTPUT.PUT_LINE(
+      department.department_name 
+    );
+  <span style="color: #DD6F48;">END</span> LOOP;
+  <span style="color: #DD6F48;">END</span> IF;
+  <span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/procedures/country_dept.sql">sql bestand</a>
+</p>
+
+<p>
+Je kan dit programma als volgt oproepen:
+</p>
+<pre class="example">
+SQL&gt; EXEC country_dept(5);
+SQL&gt; EXEC country_dept('US');
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org39f70d3" class="outline-2">
+<h2 id="org39f70d3">Opgave 9</h2>
+<div class="outline-text-2" id="text-org39f70d3">
+<p>
+Maak een procedure die het volgende doet: 
+</p>
+
+<ul class="org-ul">
+<li>Vanuit het calling programma wordt een department_id en een percentage voor 
+loonsverhoging meegegeven</li>
+<li>van dit departement wordt bovenaan de lijst de naam van het departement (‘
+Het gekozen departement is: &#x2026; [naam departement]) afgedrukt en daaronder 
+alle werknemers(naam en id) die er werken met hun huidige salaris</li>
+<li>deze werknemers krijgen een loonsverhoging volgens het meegegeven percentage</li>
+<li>na een blanco regel wordt het aantal salarisverhogingen afgedrukt 
+voorafgegaan door de tekst “Aantal salarisverhogingen: &#x2026;”</li>
+<li>op een nieuwe regel wordt volgende titel afgedrukt: “SITUATIE NA WIJZIGING.” 
+En daaronder worden alle werknemers met hun nieuwe salaris afgedrukt.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">PROCEDURE</span> <span style="color: #A89984;">raise_salary</span>(
+  p_department_id employees.department_id%<span style="color: #DD6F48;">type</span>,
+  p_percent_raise <span style="color: #DD6F48;">NUMBER</span>
+)
+<span style="color: #DD6F48;">AS</span>
+  v_name_dep departments.department_name%<span style="color: #DD6F48;">type</span>;
+  v_raise <span style="color: #DD6F48;">NUMBER</span>;
+  v_raises <span style="color: #DD6F48;">NUMBER</span> := 0;
+  <span style="color: #DD6F48;">BEGIN</span>
+    v_raise := p_percent_raise / 100;
+    <span style="color: #7C6F64;">--2</span>
+    <span style="color: #DD6F48;">SELECT</span> department_name
+    <span style="color: #DD6F48;">INTO</span> v_name_dep
+    <span style="color: #DD6F48;">FROM</span> departments
+    <span style="color: #DD6F48;">WHERE</span> department_id = p_department_id;
+    DBMS_OUTPUT.PUT_LINE(
+      <span style="color: #528B8B;">'Het gekozen departement is: '</span> ||
+      TO_CHAR(v_name_dep) 
+    );
+    <span style="color: #DD6F48;">FOR</span> employee <span style="color: #DD6F48;">IN</span> (
+      <span style="color: #DD6F48;">SELECT</span> last_name, employee_id, salary
+      <span style="color: #DD6F48;">FROM</span> employees
+      <span style="color: #DD6F48;">WHERE</span> department_id = p_department_id
+    ) 
+    LOOP
+      DBMS_OUTPUT.PUT_LINE(
+        employee.last_name || 
+        CHR(9) || 
+        employee.employee_id || 
+        CHR(9) || 
+        employee.salary
+      );
+
+     <span style="color: #7C6F64;">--3</span>
+     <span style="color: #DD6F48;">UPDATE</span> employees 
+     <span style="color: #DD6F48;">SET</span> salary = (employee.salary * v_raise) + 
+       employee.salary 
+     <span style="color: #DD6F48;">WHERE</span> employee_id = employee.employee_id;
+     v_raises := v_raises + 1;
+   <span style="color: #DD6F48;">END</span> LOOP;
+   <span style="color: #7C6F64;">--4</span>
+   DBMS_OUTPUT.PUT_LINE(<span style="color: #528B8B;">''</span>);
+   DBMS_OUTPUT.PUT_LINE(
+     <span style="color: #528B8B;">'Aantal salarisverhogingen: '</span> ||
+     v_raises
+   );
+
+   <span style="color: #7C6F64;">--5</span>
+   DBMS_OUTPUT.PUT_LINE(
+     <span style="color: #528B8B;">'SITUATIE NA WIJZIGING'</span>
+   );
+   <span style="color: #DD6F48;">FOR</span> employee <span style="color: #DD6F48;">IN</span> (
+     <span style="color: #DD6F48;">SELECT</span> last_name, employee_id, salary
+     <span style="color: #DD6F48;">FROM</span> employees
+     <span style="color: #DD6F48;">WHERE</span> department_id = p_department_id
+   )
+   LOOP
+     DBMS_OUTPUT.PUT_LINE(
+       employee.last_name ||
+       CHR(9) || 
+       employee.employee_id ||
+       CHR(9) || 
+       employee.salary
+     );
+   <span style="color: #DD6F48;">END</span> LOOP;
+ <span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+
+<p>
+<a href="../sql-files/procedures/raise_salary.sql">sql bestand</a>
+</p>
+
+<p>
+Deze procedure kan je uitvoeren door aan de SQL‐prompt in te tikken:
+</p>
+<pre class="example">
+SQL&gt; EXEC raise_salary(40,1)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org8689495" class="outline-2">
+<h2 id="org8689495">Opgave 10</h2>
+<div class="outline-text-2" id="text-org8689495">
+<p>
+Schrijf een procedure die onderstaand overzicht maakt van alle steden uit een 
+bepaald land waarvan het id (in voorbeeld US) wordt meegegeven vanuit het 
+calling program. Het totaal aantal werknemers voor dit land wordt teruggegeven 
+aan het calling program. Indien er geen afdelingen gevestigd zijn in dit land, 
+dan wordt er niks afgedrukt. Voor dit land toon je de afdelingen per locatie 
+met hun aantal werknemers zoals volgt:
+</p>
+
+<p>
+   ==&gt; United States of America ‐ 1700 Seattle   <br />
+Administration: 1 werknemers <br />
+Accounting: 2 werknemers <br />
+Purchasing: 6 werknemers <br />
+Executive: 3 werknemers <br />
+Finance: 6 werknemers <br />
+==&gt; United States of America ‐ 1400 Southlake <br />
+IT: 5 werknemers <br />
+==&gt; United States of America <br />
+ ‐ 1500 South San Francisco <br />
+Shipping: 45 werknemers
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">PROCEDURE</span> <span style="color: #A89984;">show_cities</span>(
+  p_country_id <span style="color: #DD6F48;">IN</span> locations.country_id%<span style="color: #DD6F48;">type</span>,
+  p_count_location <span style="color: #DD6F48;">OUT</span> <span style="color: #DD6F48;">NUMBER</span>
+)
+<span style="color: #DD6F48;">AS</span>
+  v_country_name countries.country_name%<span style="color: #DD6F48;">type</span>;
+<span style="color: #DD6F48;">BEGIN</span>
+  p_count_location :=0;
+  <span style="color: #DD6F48;">FOR</span> location <span style="color: #DD6F48;">IN</span> (
+    <span style="color: #DD6F48;">SELECT</span> *
+    <span style="color: #DD6F48;">FROM</span> locations
+    <span style="color: #DD6F48;">WHERE</span> country_id = p_country_id
+    <span style="color: #DD6F48;">AND</span> location_id <span style="color: #DD6F48;">IN</span> (
+      <span style="color: #DD6F48;">SELECT</span> location_id <span style="color: #DD6F48;">FROM</span> departments
+    )
+  )
+  LOOP
+    <span style="color: #DD6F48;">SELECT</span> country_name <span style="color: #DD6F48;">INTO</span> v_country_name
+    <span style="color: #DD6F48;">FROM</span> countries
+    <span style="color: #DD6F48;">WHERE</span> country_id = location.country_id;
+    DBMS_OUTPUT.PUT_LINE(
+      <span style="color: #528B8B;">'==&gt; '</span> ||
+      v_country_name ||
+      <span style="color: #528B8B;">' - '</span> ||
+      location.location_id || 
+      <span style="color: #528B8B;">' '</span> || 
+      location.city
+    );
+    <span style="color: #DD6F48;">FOR</span> department <span style="color: #DD6F48;">IN</span> (
+      <span style="color: #DD6F48;">SELECT</span> department_name, <span style="color: #FE8019;">COUNT</span>(*) NUMBER_of_departments
+      <span style="color: #DD6F48;">FROM</span> departments <span style="color: #DD6F48;">JOIN</span> employees <span style="color: #DD6F48;">USING</span> (department_id)
+      <span style="color: #DD6F48;">WHERE</span> departments.location_id = location.location_id
+      <span style="color: #DD6F48;">GROUP</span> <span style="color: #DD6F48;">BY</span> department_name
+    )
+    LOOP
+      DBMS_OUTPUT.PUT_LINE(
+        department.department_name || 
+        <span style="color: #528B8B;">': '</span> || 
+        department.NUMBER_of_departments
+      );
+      p_count_location := p_count_location + department.NUMBER_of_departments;
+    <span style="color: #DD6F48;">END</span> LOOP;
+  <span style="color: #DD6F48;">END</span> LOOP;
+  <span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/procedures/show_cities.sql">sql bestand</a>
+</p>
+
+<p>
+Deze procedure kan je uitvoeren door aan de SQL‐prompt in te tikken:
+</p>
+<pre class="example">
+SQL&gt; EXEC show_cities(40,1)
+</pre>
+
+<p>
+Je kan dit programma als volgt oproepen (bind-variable):
+</p>
+<pre class="example">
+SQL&gt; VARIABLE b_NUMBER_of_departments NUMBER(5);
+SQL&gt; show_cities('US', b_NUMBER_of_departments)
+</pre>
+
+<p>
+Dit is hoe het caller programma eruit kan zien (anoniem block):
+</p>
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">DECLARE</span>
+  v_NUMBER_of_departments <span style="color: #DD6F48;">NUMBER</span>(5);
+<span style="color: #DD6F48;">BEGIN</span>
+  show_cities(<span style="color: #528B8B;">'US'</span>, v_NUMBER_of_departments);
+  DBMS_OUTPUT.PUT_LINE(v_NUMBER_of_departments);
+<span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/procedures/show_cities_caller.sql">sql bestand</a>
+</p>
+
+<p>
+Je kan de <b><b>functie</b></b> als volgt oproepen:
+</p>
+<pre class="example">
+SQL&gt; START &lt;pathNaarBestand&gt;/show_cities_caller
+</pre>
+
+<p>
+<a href="../index.html">Home</a> &gt; <a href="plsql.html">PLSQL</a> &gt; Procedures
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Robin Wils</p>
+<p class="date">Created: 2019-08-14 Wed 16:39</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

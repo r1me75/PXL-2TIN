@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-08-14 Wed 16:40 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Oefeningen PL/SQL - Hoofdstuk 4: Triggers</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Robin Wils" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../solarized-dark.min.css"/>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Oefeningen PL/SQL - Hoofdstuk 4: Triggers</h1>
+<hr />
+<p>
+<a href="../index.html">Home</a> &gt; <a href="plsql.html">PLSQL</a> &gt; Triggers <br />
+<a href="https://pxl-college-projects.gitlab.io/big-data-exercises-pxl.gitlab.io/plsql/triggers.org">View org source</a>
+</p>
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org57762bc">Opgave 1</a></li>
+<li><a href="#orge268754">Opgave 2</a></li>
+<li><a href="#orgab774e6">Opgave 3 WERKT NIET</a></li>
+<li><a href="#org0add6de">Opgave 4</a></li>
+<li><a href="#orgce837ed">Opgave 5</a></li>
+<li><a href="#orgd0306ec">Opgave 6</a></li>
+<li><a href="#org8ded561">Opgave 7 NIET DEFTIG GETEST</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org57762bc" class="outline-2">
+<h2 id="org57762bc">Opgave 1</h2>
+<div class="outline-text-2" id="text-org57762bc">
+<p>
+Zorg ervoor dat onderstaande controles automatisch gebeuren indien
+het laagste en/of hoogste salaris wordt aangepast in de tabel jobs:
+</p>
+
+<ul class="org-ul">
+<li>als de gebruiker 'student' en/of 'bezoeker' deze aanpassing(en) 
+wil doen dan mag dit niet doorgaan en moet de melding "Je hebt 
+onvoldoende rechten om deze actie uit te voeren!" verschijnen.</li>
+
+<li>als een andere gebruiker deze aanpassing(en) wil doen dan mag 
+deze doorgaan maar moet volgende waarschuwing getoond worden "Ben 
+je zeker dat je het minimum en/of maximum salaris van één of 
+meerdere jobs wil aanpassen? Indien niet voer dan onmiddellijk een 
+ROLLBACK uit!"</li>
+</ul>
+
+<p>
+Bewaar als trigger_oef1.sql
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">TRIGGER</span> <span style="color: #A89984;">salary_jobs_trigger</span>
+  <span style="color: #DD6F48;">BEFORE</span> <span style="color: #DD6F48;">UPDATE</span> <span style="color: #DD6F48;">OF</span> min_salary, max_salary <span style="color: #DD6F48;">ON</span> jobs
+<span style="color: #DD6F48;">BEGIN</span>
+  IF <span style="color: #FE8019;">USER</span> <span style="color: #DD6F48;">IN</span> (<span style="color: #528B8B;">'STUDENT'</span>,<span style="color: #528B8B;">'BEZOEKER'</span>) 
+  <span style="color: #DD6F48;">THEN</span> 
+    RAISE_APPLICATION_ERROR(
+      -20000, 
+      <span style="color: #528B8B;">'Je hebt onvoldoende rechten om deze actie uit te voeren!'</span>
+    );
+  <span style="color: #DD6F48;">ELSE</span>
+    DBMS_OUTPUT.PUT_LINE(
+      <span style="color: #528B8B;">'Ben je zeker dat je het minimum en/of maximum '</span> || 
+      <span style="color: #528B8B;">'salaris van &#233;&#233;n of meerdere jobs wil aanpassen? '</span> ||
+      <span style="color: #528B8B;">'Indien niet voer dan een ROLLBACK uit!'</span>
+    );
+  <span style="color: #DD6F48;">END</span> IF;
+  <span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/triggers/trigger_oef1.sql">sql bestand</a>
+</p>
+
+<p>
+Je kan triggers aanmaken via het volgende commando:
+</p>
+<pre class="example">
+SQL&gt; START &lt;filepath&gt;/trigger_naam
+</pre>
+
+<p>
+Je kan de trigger functie testen via:
+</p>
+<pre class="example">
+SQL&gt; UPDATE jobs set min_salary = 0 WHERE job_id = 'SA_REP';
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orge268754" class="outline-2">
+<h2 id="orge268754">Opgave 2</h2>
+<div class="outline-text-2" id="text-orge268754">
+<p>
+Schrijf een database trigger waardoor bijgehouden wordt wie, wanneer,
+welke bewerking (insert, update of delete) op de tabel job_history 
+heeft uitgevoerd. Maak daarvoor de tabel log_history aan met de 
+volgende kolommen: log_user, log_datum, log_tijd, log_actie. <br />
+Bewaar als trigger_oef2.sql.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">TABLE</span> <span style="color: #A89984;">log_history</span>
+(
+  log_user VARCHAR2(30), 
+  log_datum <span style="color: #66999D;">DATE</span>, 
+  log_tijd <span style="color: #66999D;">TIMESTAMP</span>, 
+  log_actie VARCHAR2(15)
+);
+
+<span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">TRIGGER</span> <span style="color: #A89984;">job_history_trigger</span>
+   <span style="color: #DD6F48;">AFTER</span> <span style="color: #DD6F48;">INSERT</span> <span style="color: #DD6F48;">OR</span> <span style="color: #DD6F48;">UPDATE</span> <span style="color: #DD6F48;">OR</span> <span style="color: #DD6F48;">DELETE</span> <span style="color: #DD6F48;">ON</span> job_history
+<span style="color: #DD6F48;">DECLARE</span>
+   v_action VARCHAR2(15) ;
+<span style="color: #DD6F48;">BEGIN</span>
+  IF INSERTING <span style="color: #DD6F48;">THEN</span>
+    v_action := <span style="color: #528B8B;">'INSERT'</span>;
+  ELSIF UPDATING <span style="color: #DD6F48;">THEN</span>
+    v_action := <span style="color: #528B8B;">'UPDATE'</span>;
+  <span style="color: #DD6F48;">ELSE</span>
+    v_action := <span style="color: #528B8B;">'DELETE'</span>;
+  <span style="color: #DD6F48;">END</span> IF;
+
+  <span style="color: #DD6F48;">INSERT</span> <span style="color: #DD6F48;">INTO</span> log_history
+    <span style="color: #DD6F48;">VALUES</span>(
+      <span style="color: #FE8019;">USER</span>, 
+      SYSDATE,
+      SYSTIMESTAMP, 
+      v_action
+    );     
+  <span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+
+<p>
+<i>(Ik denk dat je tijdens het examen oefening best de create table buiten 
+het bestand doet, of in een aparte sql-file zou ook kunnen.)</i>
+</p>
+
+<p>
+<a href="../sql-files/triggers/trigger_oef2.sql">sql bestand</a>
+</p>
+
+<p>
+Je kan de trigger functie testen via:
+</p>
+<pre class="example">
+SQL&gt; INSERT INTO job_history VALUES(127, '14-JAN-99', SYSDATE, 'ST_CLERK', 50);
+SQL&gt; SELECT * FROM job_history;
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgab774e6" class="outline-2">
+<h2 id="orgab774e6">Opgave 3 WERKT NIET</h2>
+<div class="outline-text-2" id="text-orgab774e6">
+<p>
+Schrijf een trigger die ervoor zorgt : 
+</p>
+<ul class="org-ul">
+<li>dat maandlonen enkel op maandag tussen 9:00 en 17:00 kunnen aangepast worden.</li>
+<li>dat in het weekend geen employees verwijderd of toegevoegd kunnen worden.</li>
+</ul>
+
+<p>
+Bewaar als trigger_oef3.sql 
+</p>
+
+<p>
+<span class="underline">Tip:</span> om de tijd uit de systeemdatum te halen gebruik je de functie to_char 
+met als formaat 'hh24:mi:ss'.
+</p>
+
+<p>
+<i>Denk er aan dat zondag dag 1 is in PLSQL.</i>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">TRIGGER</span> <span style="color: #A89984;">month_loan_trigger</span>
+  <span style="color: #DD6F48;">BEFORE</span> 
+    <span style="color: #DD6F48;">UPDATE</span> <span style="color: #DD6F48;">OF</span> salary
+    <span style="color: #DD6F48;">OR</span> <span style="color: #DD6F48;">DELETE</span>
+    <span style="color: #DD6F48;">OR</span> <span style="color: #DD6F48;">INSERT</span> <span style="color: #DD6F48;">ON</span> employees
+<span style="color: #DD6F48;">DECLARE</span>
+  v_hour varchar2(8);
+<span style="color: #DD6F48;">BEGIN</span>
+  IF DELETING <span style="color: #DD6F48;">OR</span> INSERTING <span style="color: #DD6F48;">THEN</span>
+    IF 
+      TO_CHAR(SYSDATE, <span style="color: #528B8B;">'D'</span>) = 7 
+      <span style="color: #DD6F48;">OR</span> TO_CHAR(SYSDATE, <span style="color: #528B8B;">'D'</span>) = 1 
+    <span style="color: #DD6F48;">THEN</span>
+      RAISE_APPLICATION_ERROR(
+        -20000, 
+        <span style="color: #528B8B;">'Can'</span>t <span style="color: #DD6F48;">add</span> <span style="color: #DD6F48;">or</span> <span style="color: #DD6F48;">delete</span> salary during weekends.<span style="color: #528B8B;">'</span>
+<span style="color: #528B8B;">      );</span>
+<span style="color: #528B8B;">    END IF;</span>
+<span style="color: #528B8B;">  ELSE</span>
+<span style="color: #528B8B;">    v_hour := TO_CHAR(SYSDATE,'</span>hh24:mi:ss<span style="color: #528B8B;">');</span>
+<span style="color: #528B8B;">    IF</span>
+<span style="color: #528B8B;">      TO_CHAR(SYSDATE, '</span>d<span style="color: #528B8B;">') != 2 </span>
+<span style="color: #528B8B;">      OR v_hour &lt; '</span>09:00:00<span style="color: #528B8B;">' </span>
+<span style="color: #528B8B;">      OR v_hour &gt; '</span>17:00:00<span style="color: #528B8B;">'</span>
+<span style="color: #528B8B;">    THEN</span>
+<span style="color: #528B8B;">      RAISE_APPLICATION_ERROR(</span>
+<span style="color: #528B8B;">        -20000,  </span>
+<span style="color: #528B8B;">        '</span>Can<span style="color: #528B8B;">'t edit salary, '</span> || 
+        <span style="color: #528B8B;">'can only edit during Mondays during 9:00 - 17:00'</span>
+      );
+    <span style="color: #DD6F48;">END</span> IF;
+  <span style="color: #DD6F48;">END</span> IF;
+  <span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+<p>
+<a href="../sql-files/triggers/trigger_oef3.sql">sql bestand</a>
+</p>
+
+<p>
+Je kan de trigger functie testen via:
+</p>
+<pre class="example">
+SQL&gt; DELETE FROM employees WHERE employee_id = 205;
+SQL&gt; INSERT INTO employees (salary) VALUES (10000);
+</pre>
+
+<p>
+<i>Het kan handig zijn om de systeemdatum van je PC tijdelijk te wijzigen.</i>
+</p>
+
+<p>
+<a href="../index.html">Home</a> &gt; <a href="plsql.html">PLSQL</a> &gt; Triggers
+</p>
+</div>
+</div>
+<div id="outline-container-org0add6de" class="outline-2">
+<h2 id="org0add6de">Opgave 4</h2>
+<div class="outline-text-2" id="text-org0add6de">
+<p>
+Doe al het nodige om er voor te zorgen dat bij het wijzigen van het salaris 
+van een of meerdere medewerkers de verhoging nooit meer mag zijn dan 5%: 
+</p>
+<ul class="org-ul">
+<li>melding indien meer dan 5%: "Een loonsverhoging van meer dan 5% is niet 
+toegelaten"</li>
+<li>de verhoging mag niet doorgaan Een verlaging resulteert in een foutmelding 
+"Loonsverlaging kan niet!" en deze mag dus ook niet doorgaan.</li>
+</ul>
+
+<p>
+Bewaar als trigger_oef4.sql
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">TRIGGER</span> <span style="color: #A89984;">loan_raise_trigger</span>
+  <span style="color: #DD6F48;">AFTER</span> <span style="color: #DD6F48;">UPDATE</span> 
+  <span style="color: #DD6F48;">OF</span> salary 
+  <span style="color: #DD6F48;">ON</span> employees
+  <span style="color: #DD6F48;">FOR</span> <span style="color: #DD6F48;">EACH</span> <span style="color: #66999D;">ROW</span>
+<span style="color: #DD6F48;">BEGIN</span>
+  IF :<span style="color: #DD6F48;">NEW</span>.salary &lt; :<span style="color: #DD6F48;">OLD</span>.salary <span style="color: #DD6F48;">THEN</span>
+    RAISE_APPLICATION_ERROR(-20000,<span style="color: #528B8B;">'Loonsverlaging kan niet!'</span>);
+  ELSIF :<span style="color: #DD6F48;">NEW</span>.salary &gt; :<span style="color: #DD6F48;">OLD</span>.salary*1.05 <span style="color: #DD6F48;">THEN</span>
+    RAISE_APPLICATION_ERROR(
+      -20000,
+      <span style="color: #528B8B;">'Een loonsverhoging van meer dan 5% is niet toegelaten!'</span>
+    );
+  <span style="color: #DD6F48;">END</span> IF;
+  <span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+
+<p>
+<a href="../sql-files/triggers/trigger_oef4.sql">sql bestand</a>
+</p>
+
+<p>
+Je kan de trigger functie testen via:
+</p>
+<pre class="example">
+SQL&gt; UPDATE employees SET salary=100000 WHERE employee_id = 206;
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgce837ed" class="outline-2">
+<h2 id="orgce837ed">Opgave 5</h2>
+<div class="outline-text-2" id="text-orgce837ed">
+<p>
+Pas de oplossing van oefening 4 zodanig aan dat deze trigger enkel werkt als 
+het gaat om de medewerkers die aangeworven zijn vóór 01‐01‐1995. <br />
+Bewaar als trigger_oef5.sql.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">TRIGGER</span> <span style="color: #A89984;">loan_raise_trigger</span>
+  <span style="color: #DD6F48;">AFTER</span> <span style="color: #DD6F48;">UPDATE</span> 
+  <span style="color: #DD6F48;">OF</span> salary 
+  <span style="color: #DD6F48;">ON</span> employees
+  <span style="color: #DD6F48;">FOR</span> <span style="color: #DD6F48;">EACH</span> <span style="color: #66999D;">ROW</span>
+  <span style="color: #DD6F48;">WHEN</span> (<span style="color: #DD6F48;">OLD</span>.hire_date &lt; TO_DATE(<span style="color: #528B8B;">'01-01-1995'</span>,<span style="color: #528B8B;">'dd-mm-yyyy'</span>))
+<span style="color: #DD6F48;">BEGIN</span>
+  IF :<span style="color: #DD6F48;">NEW</span>.salary &lt; :<span style="color: #DD6F48;">OLD</span>.salary <span style="color: #DD6F48;">THEN</span>
+    RAISE_APPLICATION_ERROR(-20000,<span style="color: #528B8B;">'Loonsverlaging kan niet!'</span>);
+  ELSIF :<span style="color: #DD6F48;">NEW</span>.salary &gt; :<span style="color: #DD6F48;">OLD</span>.salary*1.05 <span style="color: #DD6F48;">THEN</span>
+    RAISE_APPLICATION_ERROR(
+      -20000,
+      <span style="color: #528B8B;">'Een loonsverhoging van meer dan 5% is niet toegelaten!'</span>
+    );
+  <span style="color: #DD6F48;">END</span> IF;
+  <span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+
+<p>
+<a href="../sql-files/triggers/trigger_oef5.sql">sql bestand</a>
+</p>
+
+<p>
+Je kan de trigger functie testen via:
+</p>
+<pre class="example">
+SQL&gt; UPDATE employees SET salary=100000 WHERE employee_id = 204;
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgd0306ec" class="outline-2">
+<h2 id="orgd0306ec">Opgave 6</h2>
+<div class="outline-text-2" id="text-orgd0306ec">
+<p>
+Doe al het nodige om er voor te zorgen dat: 
+</p>
+<ul class="org-ul">
+<li>bij het toevoegen of wijzigen in de tabel employees het job_id automatisch
+naar hoofdletters wordt geconverteerd en de naam en voornaam enkel begint 
+met een hoofdletter</li>
+<li>bij het toevoegen bij de hire_date nooit een datum in het verleden kan
+worden ingegeven</li>
+<li>medewerkers die promoveren en een managersfunctie krijgen, automatisch een 
+salarisverhoging krijgen van 5%. Het moet wel degelijk om een promotie gaan. 
+Iemand die president of vice president was en manager wordt, krijgt geen 
+verhoging. Gebruik hiervoor het job_id.</li>
+</ul>
+
+<p>
+Sla op als trigger_oef6.sql.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">TRIGGER</span> <span style="color: #A89984;">data_validation_trigger</span>
+  <span style="color: #DD6F48;">BEFORE</span> <span style="color: #DD6F48;">INSERT</span> 
+  <span style="color: #DD6F48;">OR</span> <span style="color: #DD6F48;">UPDATE</span> 
+  <span style="color: #DD6F48;">ON</span> employees
+  <span style="color: #DD6F48;">FOR</span> <span style="color: #DD6F48;">EACH</span> <span style="color: #66999D;">ROW</span>
+<span style="color: #DD6F48;">BEGIN</span>
+  :<span style="color: #DD6F48;">NEW</span>.job_id := <span style="color: #FE8019;">UPPER</span>(:<span style="color: #DD6F48;">NEW</span>.job_id);
+  :<span style="color: #DD6F48;">NEW</span>.first_name := INITCAP(:<span style="color: #DD6F48;">NEW</span>.first_name);
+  :<span style="color: #DD6F48;">NEW</span>.last_name := INITCAP(:<span style="color: #DD6F48;">NEW</span>.last_name);
+  IF INSERTING <span style="color: #DD6F48;">THEN</span>
+    IF :<span style="color: #DD6F48;">NEW</span>.hire_date &lt; SYSDATE <span style="color: #DD6F48;">THEN</span>
+      raise_application_error(
+        -20000,
+        <span style="color: #528B8B;">'Date can''t be in the past.'</span>
+      );
+    <span style="color: #DD6F48;">END</span> IF;
+  <span style="color: #DD6F48;">END</span> IF;
+  IF UPDATING <span style="color: #DD6F48;">THEN</span>
+    IF 
+      :<span style="color: #DD6F48;">NEW</span>.job_id <span style="color: #DD6F48;">IN</span> (<span style="color: #528B8B;">'%MAN'</span>, <span style="color: #528B8B;">'%MGR'</span>) 
+      <span style="color: #DD6F48;">AND</span> :<span style="color: #DD6F48;">OLD</span>.job_id <span style="color: #DD6F48;">NOT</span> <span style="color: #DD6F48;">IN</span> (<span style="color: #528B8B;">'AD_PRES'</span>, <span style="color: #528B8B;">'AD_VP'</span>) 
+    <span style="color: #DD6F48;">THEN</span>
+      :<span style="color: #DD6F48;">NEW</span>.salary := :<span style="color: #DD6F48;">OLD</span>.salary*1.05;
+    <span style="color: #DD6F48;">END</span> IF;
+  <span style="color: #DD6F48;">END</span> IF;
+  <span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+
+<p>
+<a href="../sql-files/triggers/trigger_oef6.sql">sql bestand</a>
+</p>
+
+<p>
+Je kan de trigger functie testen via:
+</p>
+<pre class="example">
+SQL&gt; INSERT INTO employees (hire_date) 
+VALUES(TO_DATE('2003/05/03', 'yyyy/mm/dd'));
+</pre>
+
+<p>
+Naast dit kan je ook andere delen van de trigger testen via functies.
+Je kan een select gebruiken om de rijen op te vragen.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8ded561" class="outline-2">
+<h2 id="org8ded561">Opgave 7 NIET DEFTIG GETEST</h2>
+<div class="outline-text-2" id="text-org8ded561">
+<p>
+Zorg ervoor dat bij de creatie van een nieuwe employee volgende controles 
+gebeuren: 
+</p>
+<ul class="org-ul">
+<li>als geen manager_id wordt ingevoerd, wordt automatisch de manager van het
+departement waar deze persoon aan toegewezen wordt, de directe chef. Toon 
+in dat geval als melding op het scherm "de chef wordt [de naam en de 
+voornaam van de chef]."</li>
+<li>als er geen hire_date werd ingevuld dan wordt dit automatisch de 
+eerstvolgende maandag na de huidige datum.</li>
+<li>als geen salary werd opgegeven, wordt dit automatisch 1000. Druk in dat 
+geval af "het salaris van employee [naam employee] wordt 1000".</li>
+</ul>
+
+<p>
+Als een employee verwijderd wordt, verschijnt een melding 
+"dit is per maand een besparing van [/xxx/] euro", (waarbij je de <i>xxx</i> 
+vervangtdoor het maandloon van deze employee). <br />
+Bewaar als trigger_oef7.sql.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-plsql"><span style="color: #DD6F48;">CREATE</span> <span style="color: #DD6F48;">OR</span> REPLACE <span style="color: #DD6F48;">TRIGGER</span> <span style="color: #A89984;">data_validation_trigger</span>
+  <span style="color: #DD6F48;">BEFORE</span> 
+    <span style="color: #DD6F48;">INSERT</span> <span style="color: #DD6F48;">OR</span> <span style="color: #DD6F48;">DELETE</span> 
+           <span style="color: #DD6F48;">ON</span> employees
+           <span style="color: #DD6F48;">FOR</span> <span style="color: #DD6F48;">EACH</span> <span style="color: #66999D;">ROW</span>
+  <span style="color: #DD6F48;">DECLARE</span>
+    v_manager_id departments.manager_id%<span style="color: #DD6F48;">TYPE</span>;
+    v_firstname employees.first_Name%<span style="color: #DD6F48;">TYPE</span>;
+    v_name employees.last_name%<span style="color: #DD6F48;">TYPE</span>;
+
+  <span style="color: #DD6F48;">BEGIN</span>
+  IF INSERTING <span style="color: #DD6F48;">THEN</span>
+    IF :<span style="color: #DD6F48;">NEW</span>.manager_id <span style="color: #DD6F48;">IS</span> <span style="color: #DD6F48;">NULL</span> <span style="color: #DD6F48;">THEN</span>
+      <span style="color: #DD6F48;">SELECT</span> manager_id
+      <span style="color: #DD6F48;">INTO</span> v_manager_id
+      <span style="color: #DD6F48;">FROM</span> departments
+      <span style="color: #DD6F48;">WHERE</span> department_id = :<span style="color: #DD6F48;">NEW</span>.department_id;
+
+      <span style="color: #DD6F48;">SELECT</span> first_name, last_name
+      <span style="color: #DD6F48;">INTO</span> v_firstname, v_name
+      <span style="color: #DD6F48;">FROM</span> employees
+      <span style="color: #DD6F48;">WHERE</span> employee_id = v_manager_id;
+
+      :<span style="color: #DD6F48;">NEW</span>.manager_id := v_manager_id;
+      DBMS_OUTPUT.PUT_LINE(
+        <span style="color: #528B8B;">'de chef wordt '</span> ||
+        v_name || 
+        <span style="color: #528B8B;">' '</span> || 
+        v_firstname
+      );
+    <span style="color: #DD6F48;">END</span> IF;
+
+    IF :<span style="color: #DD6F48;">NEW</span>.hire_date <span style="color: #DD6F48;">IS</span> <span style="color: #DD6F48;">NULL</span> <span style="color: #DD6F48;">THEN</span>
+      :<span style="color: #DD6F48;">NEW</span>.hire_date := NEXT_DAY(SYSDATE, <span style="color: #528B8B;">'MONDAY'</span>);
+    <span style="color: #DD6F48;">END</span> IF;
+
+    IF :<span style="color: #DD6F48;">NEW</span>.salary <span style="color: #DD6F48;">IS</span> <span style="color: #DD6F48;">NULL</span> <span style="color: #DD6F48;">THEN</span>
+      :<span style="color: #DD6F48;">NEW</span>.salary := 1000;
+      DBMS_OUTPUT.PUT_LINE(
+        <span style="color: #528B8B;">'het salaris van employee '</span> || 
+        :<span style="color: #DD6F48;">NEW</span>.last_name || 
+        <span style="color: #528B8B;">' wordt 1000.'</span>
+      );
+    <span style="color: #DD6F48;">END</span> IF;
+
+  ELSIF DELETING <span style="color: #DD6F48;">THEN</span>
+    DBMS_OUTPUT.PUT_LINE(
+      <span style="color: #528B8B;">'dit is per maand een besparing van '</span> || 
+      :<span style="color: #DD6F48;">OLD</span>.salary || 
+      <span style="color: #528B8B;">' euro.'</span>
+    );
+  <span style="color: #DD6F48;">END</span> IF;
+  <span style="color: #DD6F48;">END</span>;
+/
+</pre>
+</div>
+
+<p>
+<a href="../sql-files/triggers/trigger_oef7.sql">sql bestand</a>
+</p>
+
+<p>
+Je kan de trigger functie testen via:
+</p>
+<pre class="example">
+SQL&gt; DELETE FROM employees WHERE employee_id = 206;
+</pre>
+
+<p>
+<a href="../index.html">Home</a> &gt; <a href="plsql.html">PLSQL</a> &gt; Triggers
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Robin Wils</p>
+<p class="date">Created: 2019-08-14 Wed 16:40</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

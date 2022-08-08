@@ -1,0 +1,275 @@
+#+TITLE: Oefeningen MongoDB - Oefeningen Algemeen Big Data Reeks1
+#+AUTHOR: Robin Wils
+#+INCLUDE: "../org-options.org"
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../solarized-dark.min.css"/>
+-----
+[[file:../index.org][Home]] > [[file:mongodb.org][MongoDB]] > Algemene oefeningen \\
+[[https://pxl-college-projects.gitlab.io/big-data-exercises-pxl.gitlab.io/mongodb/0-Algemeen_Big_Data_Reeks1.org][View org source]]
+
+#+TOC: headlines
+
+** Opgave 1 
+Maak een databank '1TINdb' aan.
+
+#+BEGIN_SRC mongo
+use 1TINdb
+#+END_SRC
+
+** Opgave 2 
+Toon alle databanken. \\
+Waarom wordt '1TINdb' nog niet getoond?
+ 
+/MongoDB gebruikt momenteel een ongemaakte databank./
+/De databank wordt pas gecreëerd wanneer je iets opslaagt./
+/Deze ongemaakte databank wordt aangemaakt wanneer je iets in de databank
+steekt./
+
+** Opgave 3 
+Geef het commando om te tonen wat je huidige databank is.
+
+#+BEGIN_SRC mongo
+db
+#+END_SRC
+
+** Opgave 4 
+Maak een collectie studentenregatta.
+
+#+BEGIN_SRC mongo
+db.createCollection("studentenregatta")
+#+END_SRC
+
+** Opgave 5 
+Voer dit document in en zorg ervoor dat _id als tekst wordt geregistreerd. \\
+Waarom is dit nodig? 
+
+| _id:          | 001 |
+| team:         | PXL |
+| aantal_likes: | 820 |
+| teamleden:    |   9 |
+
+Je kan telkens de inhoud van je collection opvragen door: \\
+db.collectienaam.find() \\
+Doe dit na elke instructie om je resultaat te controleren! 
+
+/MongoDB gebruikt '_id' als een hexadecimaal uniek nummer in elke collectie 
+voor elk document tenzij we het zelf in onze collectie steken./
+
+#+BEGIN_SRC mongo
+db.studentenregatta.insertOne({
+  "_id" : "001",
+  "team": "PXL",
+  "aantal_likes": "820",  
+  "teamleden": "9"
+})
+#+END_SRC
+
+** Opgave 6 
+Voeg via 1 instructie 2 documenten toe:
+
+| _id:       |  002 |
+| team:      | UCLL |
+| teamleden: |    8 |
+ 
+\\
+
+| _id:          |      003 |
+| team:         | Uhasselt |
+| aantal_likes: |      400 |
+
+Merk op dat de 3 documenten in de collectie studentenregatta een verschillende 
+structuur hebben.
+
+#+BEGIN_SRC mongo :db 1TINdb
+db.studentenregatta.insertMany([
+  {"_id" : "002", "team": "UCLL", "teamleden": "8"},
+  {"_id" : "003", "team": "Uhasselt", "aantal_likes": "400"}
+])
+#+END_SRC
+
+** Opgave 7 
+Vervang in de collectie studentenregatta de naam van het team PXL door 
+'Hogeschool PXL'.
+
+#+BEGIN_SRC mongo :db 1TINdb
+db.studentenregatta.update(
+  {"team": "PXL"}, 
+  {"team": "Hogeschool PXL"}
+)
+#+END_SRC
+ 
+** Opgave 8 
+Wijzig het document van het team Hogeschool PXL. \\ 
+Voeg het volgende subdocument toe:
+ 
+| supporters: | personeel: 50  |
+|             | studenten: 150 |
+
+#+BEGIN_SRC mongo :db 1TINdb
+db.studentenregatta.insertOne({
+  "supporters": {
+    "personeel": 50,
+    "studenten": 150
+  }
+})
+#+END_SRC
+
+** Opgave 9 
+Verwijder de collectie studentenregatta.
+
+#+BEGIN_SRC mongo :db 1TINdb
+db.studentenregatta.drop()
+#+END_SRC
+ 
+** Opgave 10 
+Voeg met 1 instructie in een nieuwe collectie films dit document toe: 
+
+| naam: | Iedereen beroemd |
+| jaar: |             2000 |
+
+Werd er een veld toegevoegd? \\
+/Ja, de gevraagde collectie en een _id veld werd toegevoegd./
+
+#+BEGIN_SRC mongo :db 1TINdb
+db.films.insertOne({
+  "naam": "Iedereen beroemd",
+  "jaar": 2000
+})
+#+END_SRC
+
+** Opgave 11 
+Wijzig het document van de film Iedereen beroemd. \\ 
+Voeg de volgende kenmerken toe: \\
+acteurs: Josse De Pauw, Eva Van Der Gucht, Werner De Smedt
+
+#+BEGIN_SRC mongo :db 1TINdb 
+db.films.update(
+  {"naam": "Iedereen beroemd"},
+  {$addToSet: {"acteurs": {
+    $each: ["Josse De Pauw","Eva Van Der Gucht", "Werner De Smedt"]
+  }}}
+)
+#+END_SRC
+
+** Opgave 12 
+Voeg het volgende document toe aan de collectie films:
+
+| naam:     | Loft                        |
+| jaar:     | 2008                        |
+| acteurs:  | Koen De Bouw, Filip Peeters |
+| director: | Erik Van Looy               |
+
+#+BEGIN_SRC mongo :db 1TINdb
+db.films.insertOne({
+  "naam" : "Loft", 
+  "jaar": 2008, 
+  "acteurs": ["Koen De Bouw", "Filip Peeters"],
+  "director": "Erik Van Looy"
+})
+#+END_SRC
+
+** Opgave 13 
+Voeg nog een acteur toe aan de film Loft: \\
+Matthias Schoenaerts
+
+#+BEGIN_SRC mongo :db 1TINdb
+db.films.update(
+  {"naam": "Loft"}, 
+  {$addToSet: {"acteurs": "Matthias Schoenaerts"}}
+)
+#+END_SRC
+
+** Opgave 14 
+Voeg het volgende document toe aan de collectie films:
+
+| naam:     | De Premier                |
+| jaar:     | 2016                      |
+| acteurs:  | Koen De Bouw, Tine Reymer |
+| director: | Erik Van Looy             |
+
+#+BEGIN_SRC mongo :db 1TINdb
+db.films.insertOne({
+  "naam": "De Premier", 
+  "jaar": 2016, 
+  "acteurs": ["Koen De Bouw", "Tine Reymer"],
+  "director": "Erik Van Looy"
+})
+#+END_SRC
+
+** Opgave 15 
+Wijzig alle documenten waarin Erik Van Looy director is. \\ 
+Voeg een kenmerk toe: genre: thriller 
+
+#+BEGIN_SRC mongo :db 1TINdb 
+db.films.update(
+  {"director": "Eric Van Looy"},
+  {$set: {"genre": "thriller"}},
+  {multi:true}
+)
+#+END_SRC
+
+** Opgave 16 
+Maak een collectie boeken. \\
+Voeg een document toe met onderstaande kenmerken:
+
+| _id:    | A001          |                               |
+| auteur: | Stieg Larsson |                               |
+| boek:   | titel:        |      Mannen die vrouwen haten |
+|         | jaartal:      |                          2005 |
+|         | titel:        | De vrouw die met vuur speelde |
+|         | jaartal:      |                          2006 |
+
+Let op: in het veld boek staan 2 subdocumenten. 
+
+#+BEGIN_SRC mongo :db 1TINdb 
+db.boeken.insertOne({
+  "_id": "A001",
+  "auteur": "Stieg Larsson",
+  "boek": [
+    {"titel": "Mannen die vrouwen haten","jaartal": 2005},
+    {"titel": "De vrouw die met vuur speelde","jaartal": 2006}
+  ]
+})
+#+END_SRC
+
+** Opgave 17 
+Voeg een document toe met onderstaande kenmerken:
+
+| _id:    | A002                                |                       |
+| auteur: | Wiebe van der Zee, Bert van der Zee |                       |
+| boek:   | titel:                              | Succes met Big Data   |
+|         | jaartal:                            | 2016                  |
+|         | uitgeverij:                         | Van Duuren Media B.V. |
+
+#+BEGIN_SRC mongo :db 1TINdb 
+db.boeken.insertOne({
+  "_id": "A002",
+  "auteur": [
+    "Wiebe van der Zee", 
+    "Bert van der Zee"
+  ],
+  "boek": [
+    "titel": "Succes met Big Data",
+    "jaartal": 2016, 
+    "uitgeverij": "Van Duuren Media B.V."
+  ]
+})
+#+END_SRC
+
+** Opgave 18 
+Voeg het volgende subdocument toe bij de auteur Stieg Larsson (_id: A001):
+ 
+| boek: | titel:   | Gerechtigheid |
+|       | jaartal: |          2007 |
+
+#+BEGIN_SRC mongo :db 1TINdb 
+db.boeken.update(
+  {"auteur": "Stieg Larsson"},
+  {$addToSet: {
+    $push: {
+      "titel": "Gerechtigheid",
+      "jaartal": 2007
+    }
+  }}
+)
+#+END_SRC
+[[file:../index.org][Home]] > [[file:mongodb.org][MongoDB]] > Algemene oefeningen

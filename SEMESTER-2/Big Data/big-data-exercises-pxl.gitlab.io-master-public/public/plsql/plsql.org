@@ -1,0 +1,19 @@
+#+TITLE: Oefeningen PL/SQL
+#+AUTHOR: Robin Wils
+#+INCLUDE: "../org-options.org"
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../solarized-dark.min.css"/>
+-----
+[[file:../index.org][Home]] > PLSQL \\
+[[https://pxl-college-projects.gitlab.io/big-data-exercises-pxl.gitlab.io/plsql/plsql.org][View org source]]
+- [[file:functies.org][Functies]]
+- [[file:procedures.org][Procedures]]
+- [[file:triggers.org][Triggers]]
+
+\\
+
+You can download an [[https://gitlab.com/PXL-college-projects/big-data-exercises-pxl.gitlab.io/-/archive/master/big-data-exercises-pxl.gitlab.io-master.zip?path=public][offline version]] of this website.
+
+This website is generated with GNU Emacs - Org mode. \\
+Feel free to visit my personal site at https://robinwils.gitlab.io.
+
+[[file:../index.org][Home]] > PLSQL

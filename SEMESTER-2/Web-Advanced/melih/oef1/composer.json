@@ -1,0 +1,12 @@
+{
+  "autoload": {
+    "psr-4": {
+      "assets\\": "src/assets/",
+      "identifiable\\": "src/identifiable/",
+      "users\\": "src/users/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8"
+  }
+}
