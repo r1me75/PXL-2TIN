@@ -1,8 +1,0 @@
-<phpunit bootstrap="vendor/autoload.php">
-    <testsuites>
-       <testsuite name="functionaltestsforapp.php">
-          <directory>./test/</directory>
-       </testsuite>
-    </testsuites>
-</phpunit>
-
